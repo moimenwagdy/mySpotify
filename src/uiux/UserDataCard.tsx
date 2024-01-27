@@ -13,7 +13,7 @@ const UserDataCard: React.FC<{
         <div className="flex justify-center items-center">
           <img
             src={imgSRC}
-            className="w-8 h-8 rounded-full"
+            className="w-10 h-10 rounded-full"
             alt="user-Image"></img>
         </div>
         <div className="">

@@ -4,5 +4,3 @@ export const endPoint: string = "https://accounts.spotify.com/authorize";
 export const responseType: string = "token";
 export const client_secret: string = "528071f575a1422e963a93a574d41ee1";
 export const scope: string = "user-read-private user-read-email";
-
-

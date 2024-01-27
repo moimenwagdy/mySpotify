@@ -26,14 +26,18 @@ const NavUserDataContainer = () => {
   }
   console.log(data);
   return (
-    <motion.main className="flex flex-col items-end -mt-10 self-end me-2">
+    <motion.main className="flex flex-col items-end -mt-2 self-end me-2">
       {data ? (
         <>
           <UserDataCard
             followers={data && data.followers.total}
             userName={data && data["display_name"]}
-            userEmail="moimenwy@gmail.com"
-            imgSRC={data && data.images.length > 0 ? data.images[0].url:"../../images/spoIcon.png"}>
+            userEmail={data && data.email}
+            imgSRC={
+              data && data.images.length > 0
+                ? data.images[0].url
+                : "../../images/spoIcon.png"
+            }>
             <Button
               onClick={logOut}
               title="Logout"

@@ -29,7 +29,9 @@ const MainLayout = () => {
         <NavUserDataContainer />
       </main>
       <NavTaps />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };

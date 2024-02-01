@@ -1,12 +1,7 @@
-import { Link } from "react-router-dom";
+
+
 const Home: React.FC = () => {
-  return (
-    <>
-      <Link className="mt-24 block" to="/">
-        back
-      </Link>
-    </>
-  );
+  return <></>;
 };
 
 export default Home;

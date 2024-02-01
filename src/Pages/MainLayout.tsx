@@ -1,16 +1,18 @@
 import { Outlet } from "react-router";
 import { useEffect } from "react";
-import { expirationDuration, useToken } from "../utllties/setFutureDate";
+import { expirationDuration, myToken } from "../utllties/setFutureDate";
 import { useSubmit } from "react-router-dom";
-import Header from "../components/Navbar";
+import Header from "../components/Header";
+import NavUserDataContainer from "../uiux/NavUserDataContainer";
+import NavTaps from "../components/TapsNavbar";
 
 const MainLayout = () => {
   const submit = useSubmit();
-  const token = useToken();
+  const token = myToken();
   const expirationStarted = localStorage.getItem("tokenExpire");
   useEffect(() => {
     const timer = expirationDuration();
-    console.log(timer);
+
     if (token?.expired) {
       submit(null, { method: "POST", action: "logout" });
     }
@@ -23,6 +25,10 @@ const MainLayout = () => {
   return (
     <>
       <Header />
+      <main className="flex justify-end -mt-3 sm:-mt-1 mb-2">
+        <NavUserDataContainer />
+      </main>
+      <NavTaps />
       <Outlet />
     </>
   );

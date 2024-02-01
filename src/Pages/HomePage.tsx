@@ -1,6 +1,6 @@
 import { LoaderFunction } from "react-router";
 import Home from "../components/Home";
-import { param } from "../utllties/interfaces";
+import { LoaderRequest } from "../utllties/interfaces";
 import getNonUserToken from "../utllties/getNonUserToken";
 import setFutureDate from "../utllties/setFutureDate";
 
@@ -15,7 +15,9 @@ const HomePage = () => {
 export default HomePage;
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const loader: LoaderFunction = async function ({ request }: param) {
+export const loader: LoaderFunction = async function ({
+  request,
+}: LoaderRequest) {
   const Hashparams = new URLSearchParams(window.location.hash.substring(1));
   const token: string | null = Hashparams.get("access_token");
   const tokenExpire: string | null = Hashparams.get("expires_in");

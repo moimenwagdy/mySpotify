@@ -6,14 +6,14 @@ import {
   responseType,
   scope,
 } from "../utllties/apiCredintials";
-import { useToken } from "../utllties/setFutureDate";
+import { myToken } from "../utllties/setFutureDate";
 import { motion } from "framer-motion";
 const Welcome = () => {
-  const token = useToken();
+  const token = myToken();
   console.log(token);
   return (
     <main className="h-[100vh]">
-      <section className="flex justify-center items-center  bg-smImg  sm:bg-mdImg md:bg-lgImg min-h-full bg-cover ">
+      <section className="flex justify-center items-center  bg-smImg  sm:bg-mdImg md:bg-lgImg min-h-full bg-cover absolute top-0 right-0 left-0 z-[0]  ">
         <div className="h-[150px] flex justify-start items-center gap-y-6 flex-col">
           <motion.h1
             initial={{ opacity: 0 }}

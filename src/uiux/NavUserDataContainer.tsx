@@ -4,7 +4,7 @@ import Button from "./Button";
 import { useSubmit } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { userProfileData } from "../utllties/userProfileData";
-import { useToken } from "../utllties/setFutureDate";
+import { myToken } from "../utllties/setFutureDate";
 import {
   endPoint,
   clientID,
@@ -13,7 +13,7 @@ import {
 } from "../utllties/apiCredintials";
 userProfileData;
 const NavUserDataContainer = () => {
-  const token = useToken();
+  const token = myToken();
   const userToken = token?.userToken;
   const { data } = useQuery({
     queryKey: ["userProfileData"],
@@ -24,9 +24,9 @@ const NavUserDataContainer = () => {
   function logOut() {
     submit(null, { method: "POST", action: "logout" });
   }
-  console.log(data);
+
   return (
-    <motion.main className="flex flex-col items-end -mt-2 self-end me-2">
+    <section className="flex flex-col items-end -mb-4 mt-4  self-end me-2">
       {data ? (
         <>
           <UserDataCard
@@ -41,7 +41,7 @@ const NavUserDataContainer = () => {
             <Button
               onClick={logOut}
               title="Logout"
-              className="bg-light text-[10px] px-1 text-dark "
+              className="bg-light text-xs px-1 py-[0!important] text-dark "
             />
           </UserDataCard>
         </>
@@ -62,7 +62,7 @@ const NavUserDataContainer = () => {
           </motion.a>
         </UserDataCard>
       )}
-    </motion.main>
+    </section>
   );
 };
 

@@ -1,16 +1,16 @@
 const Button: React.FC<{
   title: string;
-  className: string;
+  className?: string;
   onClick?: () => void;
   mainButton?: boolean;
-}> = (props) => {
+}> = ({ title, className, onClick, mainButton }) => {
   return (
     <button
-      onClick={props.onClick}
-      className={` ${props.mainButton ? "px-7 py-3" : ""}  rounded-md ${
-        props.className
-      }`}>
-      {props.title}
+      onClick={onClick}
+      className={` ${
+        mainButton ? "px-7 py-3" : " py-3"
+      }  rounded-md ${className}`}>
+      {title}
     </button>
   );
 };

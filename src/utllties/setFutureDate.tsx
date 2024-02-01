@@ -15,7 +15,7 @@ export const expirationDuration = function (): number | null {
   return null;
 };
 
-export const useToken = function () {
+export const myToken = function () {
   const userToken = localStorage.getItem("userToken");
   const nonUserToken = localStorage.getItem("nonUserToken");
   const expiration = expirationDuration();

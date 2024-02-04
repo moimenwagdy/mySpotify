@@ -5,6 +5,7 @@ import {
   redirectURI,
   responseType,
   scope,
+  redirectURI2,
 } from "../utllties/apiCredintials";
 import { myToken } from "../utllties/setFutureDate";
 import { motion } from "framer-motion";
@@ -24,7 +25,7 @@ const Welcome = () => {
           </motion.h1>
           <p>Our Services Are Cloned From Spotify, let's Login </p>
           <a
-            href={`${endPoint}?client_id=${clientID}&redirect_uri=${redirectURI}&scope=${scope}&response_type=${responseType}`}>
+            href={`${endPoint}?client_id=${clientID}&redirect_uri=${redirectURI},${redirectURI2}&scope=${scope}&response_type=${responseType}`}>
             <Button
               mainButton
               className="bg-dark text-lightGreen"

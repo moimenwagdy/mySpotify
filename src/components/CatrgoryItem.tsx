@@ -1,6 +1,6 @@
 import { CategoriesResponse } from "../utllties/interfaces";
 import { motion } from "framer-motion";
-const Catrgories: React.FC<CategoriesResponse> = ({ categories }) => {
+const CatrgoryItem: React.FC<CategoriesResponse> = ({ categories }) => {
   console.log(categories);
   return (
     <>
@@ -24,4 +24,4 @@ const Catrgories: React.FC<CategoriesResponse> = ({ categories }) => {
   );
 };
 
-export default Catrgories;
+export default CatrgoryItem;

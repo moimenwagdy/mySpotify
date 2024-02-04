@@ -9,7 +9,7 @@ import CategoriesPage from "../Pages/CategoriesPage"; // Loader as CategoriesLoa
 
 import Albums from "../Pages/Albums";
 import Search from "../Pages/Search";
-import PalyLists from "../Pages/PalyLists";
+import PalyLists from "../Pages/PalyListsPage";
 import Error from "../components/Error";
 const route = createBrowserRouter([
   {

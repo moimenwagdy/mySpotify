@@ -17,6 +17,9 @@ export default {
         mdImg: "url('./images/md.jpg')",
         lgImg: "url('./images/wide2.jpg')",
       },
+      fontFamily: {
+        "rubik": "Rubik",
+      },
     },
   },
   plugins: [],

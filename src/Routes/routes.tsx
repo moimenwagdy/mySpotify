@@ -5,18 +5,20 @@ import { loader as authLoader } from "../Pages/HomePage";
 import { action as logOutAction } from "../Pages/LogoutPage";
 import MainLayout from "../Pages/MainLayout";
 
-import CategoriesPage from "../Pages/CategoriesPage"; // Loader as CategoriesLoader,
+import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage"; // Loader as CategoriesLoader,
 
 import Albums from "../Pages/Albums";
 import Search from "../Pages/Search";
-import PalyLists from "../Pages/PalyListsPage";
-import Error from "../components/Error";
+import PlayLists from "../Pages/PlaylistsPage/PlayListsPage";
+import ErrorFallback from "../components/ErrorFallback";
+import PlaylistItems from "../Pages/PlaylistsPage/PlaylistItems";
+import UserPlaylist from "../Pages/UserPlaylist";
 const route = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     id: "tokenLoader",
-    errorElement: <Error />,
+    errorElement: <ErrorFallback />,
     children: [
       {
         path: "home",
@@ -27,12 +29,20 @@ const route = createBrowserRouter([
       {
         path: "categories",
         element: <CategoriesPage />,
-        errorElement: <Error />,
+        errorElement: <ErrorFallback />,
         // loader: CategoriesLoader,
       },
       { path: "albums", element: <Albums /> },
       { path: "search", element: <Search /> },
-      { path: "playlists", element: <PalyLists /> },
+      {
+        path: "playlists",
+        element: <PlayLists />,
+        children: [
+          { index: true },
+          { path: ":id", element: <PlaylistItems /> },
+          { path: "userplaylist", element: <UserPlaylist /> },
+        ],
+      },
     ],
   },
   { index: true, element: <WelcomePage /> },

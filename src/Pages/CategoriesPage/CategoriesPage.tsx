@@ -1,27 +1,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faBackward } from "@fortawesome/free-solid-svg-icons";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import categoriesFetch from "../utllties/categoriesFetch";
+import categoriesFetch from "../../utllties/categoriesFetch";
 import { useState } from "react";
-import { CategoriesResponse, FetchError } from "../utllties/interfaces";
-import { queryClient } from "../utllties/queryClient";
-import Categories from "../components/Categories";
+import { CategoriesResponse, FetchError } from "../../utllties/interfaces";
+import { queryClient } from "../../utllties/queryClient";
+import Categories from "./components/Categories";
 import { motion } from "framer-motion";
-import Button from "../uiux/Button";
-
+import Button from "../../uiux/Button";
+import ErrorFallback from "../../components/ErrorFallback";
+import LoadingIndecator from "../../components/LoadingIndecator";
 const CategoriesPage = () => {
   const [offset, setOffset] = useState<number>(0);
   const {
     data,
     isError,
     error,
+    isLoading,
   }: UseQueryResult<CategoriesResponse, FetchError> = useQuery({
     queryKey: ["categories", offset],
     queryFn: ({ signal }) => categoriesFetch({ signal, offset }),
     enabled: queryClient.getQueryData([offset]) !== offset,
     gcTime: 1000,
   });
-
+  console.log(data);
   function increase(): void {
     if (data?.categories?.next !== null) {
       setOffset((prv) => prv + 10);
@@ -79,11 +81,13 @@ const CategoriesPage = () => {
       </div>
     </div>
   );
-  // if (isLoading) {
-  //   content = <p>Loading</p>;
-  // }
+  if (isLoading) {
+    content = <LoadingIndecator />;
+  }
+
   if (isError) {
-    content = <p>{error.data.message}</p>;
+    content = <ErrorFallback ErrorData={error.data} />;
+    console.log(error.data);
   }
 
   return <>{content}</>;

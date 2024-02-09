@@ -4,7 +4,7 @@ import { expirationDuration, myToken } from "../utllties/setFutureDate";
 import { useSubmit } from "react-router-dom";
 import Header from "../components/Header";
 import NavUserDataContainer from "../uiux/NavUserDataContainer";
-import NavTaps from "../components/TapsNavbar";
+import HomeTapsNavbar from "../components/HomeTapsNavbar";
 
 const MainLayout = () => {
   const submit = useSubmit();
@@ -28,7 +28,7 @@ const MainLayout = () => {
       <main className="flex justify-end -mt-3 sm:-mt-1 mb-2">
         <NavUserDataContainer />
       </main>
-      <NavTaps />
+      <HomeTapsNavbar />
       <main>
         <Outlet />
       </main>

@@ -1,0 +1,18 @@
+// import { useParams } from "react-router";
+// import TapItem from "../../uiux/TapItem";
+
+// const PlaylistsTapsBar = () => {
+//   const params = useParams();
+//   console.log(params.id);
+//   return (
+//     <nav className="w-full ">
+//       <ul className="flex">
+//         <TapItem title="Category Playlist" destination="hgfhgf" />
+//         <TapItem title="UserPlaylist" destination="userplaylist" />
+//       </ul>
+//       {params.id}
+//     </nav>
+//   );
+// };
+
+// export default PlaylistsTapsBar;

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { CategoriesResponse } from "../utllties/interfaces";
+import { CategoriesResponse } from "../../../utllties/interfaces";
 import CatrgoryItem from "./CatrgoryItem";
 
 const Categories: React.FC<{

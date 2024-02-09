@@ -6,7 +6,7 @@ const Header = () => {
       <section className="flex h-24">
         <section className=" flex justify-center shadow-xl shadow-black/20 w-3/5 rounded-br-[100%] h-24 absolute top-0 -left-3 bg-dark">
           <div className=" flex flex-col justify-center items-start w-2/4">
-            <h1 className=" text-2xl tracking-wider  text-lightGreen text-start  ">
+            <h1 className="font-rubik font-[500] text-2xl tracking-wider  text-lightGreen text-start  ">
               My Spotify
             </h1>
           </div>

@@ -22,7 +22,8 @@ const categoriesFetch = async ({
     }
   );
   if (response.status === 404) {
-    throw new Error("Page Not Found");
+    const res = new FetchError({ message: "Page Not Found", status: 404 });
+    throw res;
   }
 
   if (!response.ok) {
@@ -31,7 +32,7 @@ const categoriesFetch = async ({
     throw res;
   }
 
-  const jsonRespnse = await response.json();
+  const jsonRespnse = response.json();
   return jsonRespnse;
 };
 

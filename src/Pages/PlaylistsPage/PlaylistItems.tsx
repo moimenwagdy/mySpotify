@@ -1,11 +1,14 @@
-import { useParams } from "react-router";
+
+import PlaylistItem from "./PlaylistItem";
 
 const PlaylistItems = () => {
-  const params = useParams();
+ 
 
-  console.log(params.id);
-  return <div className="text-white">{params.id}</div>;
+  return (
+    <>
+      <PlaylistItem />
+    </>
+  );
 };
 
 export default PlaylistItems;
-export const loader: LoaderFunction = async () => {};

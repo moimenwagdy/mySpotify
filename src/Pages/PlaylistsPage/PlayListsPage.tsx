@@ -1,7 +1,7 @@
-const PlayLists = () => {
-  return <div className="text-center mt-10"></div>;
+import PlaylistItems from "./PlaylistItems";
+
+const PlayListsPage = () => {
+  return <PlaylistItems />;
 };
 
-export default PlayLists;
-
-
+export default PlayListsPage;

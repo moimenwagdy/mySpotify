@@ -11,7 +11,8 @@ const ErrorFallback: React.FC<{ ErrorData?: errorContent }> = ({
   let title: string = "";
 
   if (isRouteErrorResponse(error)) {
-    title = error.data.message;
+    title = error.statusText || error.data.message;
+    console.log(error);
   }
   if (ErrorData) {
     title = ErrorData.message;

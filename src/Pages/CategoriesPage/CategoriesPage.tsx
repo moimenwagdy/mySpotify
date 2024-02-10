@@ -23,7 +23,7 @@ const CategoriesPage = () => {
     enabled: queryClient.getQueryData([offset]) !== offset,
     gcTime: 1000,
   });
-  console.log(data);
+
   function increase(): void {
     if (data?.categories?.next !== null) {
       setOffset((prv) => prv + 10);

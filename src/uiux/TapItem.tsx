@@ -16,7 +16,7 @@ const TapItem: React.FC<{
           if (isActive && !main) {
             return "bg-secondryColor text-white p-2";
           }
-          return "p-2 text-white  rounded-sm text-sm";
+          return "p-2 text-dark  rounded-sm text-sm";
         }}>
         {title}
       </NavLink>

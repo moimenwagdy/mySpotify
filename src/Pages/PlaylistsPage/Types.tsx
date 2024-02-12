@@ -10,6 +10,8 @@ export interface playlistItem {
 
 export default interface playlistType {
   playlists: {
+    message: string;
+    playlists: never;
     items: playlistItem[];
     limit: number;
     offset: number;

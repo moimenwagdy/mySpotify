@@ -13,7 +13,7 @@ import PlayListsPage from "../Pages/PlaylistsPage/PlayListsPage";
 import ErrorFallback from "../components/ErrorFallback";
 import { loader } from "../Pages/PlaylistsPage/PlaylistItem";
 import UserPlaylist from "../Pages/UserPlaylist";
-import PlayListsItem from "../Pages/PlaylistsPage/PlayListsPage";
+import PlaylistItems from "../Pages/PlaylistsPage/PlaylistItems";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -40,9 +40,10 @@ const route = createBrowserRouter([
       },
       {
         path: "playlists/:id",
-        element: <PlayListsItem />,
+        element: <PlaylistItems />,
         loader: loader,
-        id:"ff"
+        id: "ff",
+        // action: action,
       },
       { path: "userplaylist", element: <UserPlaylist /> },
     ],

@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const Welcome = () => {
   const token = myToken();
   console.log(token);
-  const [isExiting, setExit] = useState<boolean>(true);
+  const [isNotExiting, setExit] = useState<boolean>(true);
 
   function exitHandle() {
     setExit(false);
@@ -20,7 +20,7 @@ const Welcome = () => {
 
   return (
     <AnimatePresence>
-      {isExiting && (
+      {isNotExiting && (
         <main className="h-[100vh]">
           <motion.section
             exit={{ opacity: 0 }}

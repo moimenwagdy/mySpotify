@@ -1,7 +1,5 @@
-import PlaylistItems from "./PlaylistItems";
-
 const PlayListsPage = () => {
-  return <PlaylistItems />;
+  return <div>Playlists</div>;
 };
 
 export default PlayListsPage;

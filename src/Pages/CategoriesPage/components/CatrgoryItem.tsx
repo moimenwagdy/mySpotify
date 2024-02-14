@@ -1,25 +1,22 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CategoriesResponse } from "../../../utllties/interfaces";
 import { motion } from "framer-motion";
 import { exitAction } from "../../../stateRoot/exitSlice";
-import { useAppDispatch } from "../../../stateRoot/reduxHooks";
-import playlistPages from "../../../stateRoot/playlistPages";
+import { useAppDispatch, useAppSelector } from "../../../stateRoot/reduxHooks";
 
 const CatrgoryItem: React.FC<CategoriesResponse> = ({ categories }) => {
   const dispatch = useAppDispatch();
-  const [params] = useSearchParams();
+  const limit = useAppSelector((state) => state.playlistPages.offsetDefaultVal);
   return (
     <>
       {categories &&
         categories.items.map((item) => {
           return (
             <Link
-              to={`/playlists/${item.id}/?limit=10&offset=0`}
+              to={`/playlists/${item.id}/?limit=${limit}&offset=0`}
               key={item.id}
               onClick={() => {
                 dispatch(exitAction.notExit());
-                const offset = params.get("offset");
-                dispatch(playlistPages.actions.setOffset(offset));
               }}>
               <motion.li
                 variants={{ visible: { opacity: 1, scale: 1 } }}

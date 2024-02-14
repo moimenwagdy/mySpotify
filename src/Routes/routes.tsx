@@ -11,9 +11,9 @@ import Albums from "../Pages/Albums";
 import Search from "../Pages/Search";
 import PlayListsPage from "../Pages/PlaylistsPage/PlayListsPage";
 import ErrorFallback from "../components/ErrorFallback";
-import { loader } from "../Pages/PlaylistsPage/PlaylistItem";
+import { loader } from "../Pages/PlaylistsPage/components/PlaylistItems";
 import UserPlaylist from "../Pages/UserPlaylist";
-import PlaylistItems from "../Pages/PlaylistsPage/PlaylistItems";
+import CategoriesPlaylistContainer from "../Pages/PlaylistsPage/CategoriesPlaylistContainer";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -40,7 +40,7 @@ const route = createBrowserRouter([
       },
       {
         path: "playlists/:id",
-        element: <PlaylistItems />,
+        element: <CategoriesPlaylistContainer />,
         loader: loader,
         id: "ff",
         // action: action,

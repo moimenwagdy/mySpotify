@@ -6,7 +6,7 @@ const TapItem: React.FC<{
   main?: boolean;
 }> = ({ title, destination, main }) => {
   return (
-    <li className="p-2 text-center">
+    <li className="p-2 text-center ">
       <NavLink
         to={destination}
         className={({ isActive }) => {
@@ -16,7 +16,7 @@ const TapItem: React.FC<{
           if (isActive && !main) {
             return "bg-secondryColor text-white p-2";
           }
-          return "p-2 text-dark  rounded-sm text-sm";
+          return "p-2 text-dark  rounded-sm text-sm hover:bg-secondryColor";
         }}>
         {title}
       </NavLink>

@@ -6,16 +6,23 @@ import { errorContent } from "../utllties/interfaces";
 const ErrorFallback: React.FC<{ ErrorData?: errorContent }> = ({
   ErrorData,
 }) => {
-  const error = useRouteError();
-
+  const error = useRouteError() as errorContent;
   let title: string = "";
-
+  console.log(title);
   if (isRouteErrorResponse(error)) {
-    title = error.statusText || error.data.message;
-    console.log(error);
+    if (error.data.message) {
+      title = error.data.message;
+      console.log(error);
+    } else {
+      if (error && error.data) {
+        title = error.data;
+      } else title = error.statusText;
+      console.log(error);
+    }
   }
   if (ErrorData) {
-    title = ErrorData.message;
+    title = ErrorData?.message;
+    console.log(ErrorData);
   }
 
   return (

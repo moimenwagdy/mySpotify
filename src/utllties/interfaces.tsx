@@ -22,6 +22,7 @@ export interface CategoriesResponse {
 export interface errorContent {
   message: string;
   status: number;
+  data?: { message: string };
 }
 export class FetchError extends Error {
   data: errorContent;

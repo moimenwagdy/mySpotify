@@ -13,7 +13,7 @@ const CatrgoryItem: React.FC<CategoriesResponse> = ({ categories }) => {
         categories.items.map((item) => {
           return (
             <Link
-              to={`/playlists/${item.id}/?limit=${limit}&offset=0`}
+              to={`/playlists/${item.id}?limit=${limit}&offset=0`}
               key={item.id}
               onClick={() => {
                 dispatch(exitAction.notExit());
@@ -25,6 +25,7 @@ const CatrgoryItem: React.FC<CategoriesResponse> = ({ categories }) => {
                   scale: 0.97,
                   transition: { type: "spring", stiffness: 500 },
                 }}
+                exit={{ opacity: 0 }}
                 className="flex justify-center cursor-pointer relative">
                 <img
                   src={item.icons[0].url}

@@ -86,41 +86,11 @@ const CategoriesPage = () => {
   }
 
   if (isError) {
+   
     content = <ErrorFallback ErrorData={error.data} />;
-    console.log(error.data);
   }
 
   return <>{content}</>;
 };
 
 export default CategoriesPage;
-
-// export const Loader: LoaderFunction = async () => {
-//   // const tokens = myToken();
-//   // const userToken = tokens?.userToken;
-//   // const nonUserToken = tokens?.nonUserToken;
-//   const response = await fetch(
-//     "https://api.spotify.com/v1/browse/cagories/?limit=5",
-//     {
-//       headers: {
-//         Authorization:
-//           "Bearer " +
-//           "BQCDiDy73v3BhdcoM5q94XG3KrRa1DFktlcPA-eJkEQuy5W_80nmrEffVnNqi037rlMLpMy6hzXlX9Ix7pJhRw5r1ZeyMQQmJDWK9zHP5nHCl2lVGZrOjoZVGymDi3j4mWd96g-Zi9e7qWYZcp2drRDNh1wMrjdFRNnC-S8gEd894QqIeRjtZwVBMzKYbIH9zprwiQXq2ceCrCOQToc",
-//       },
-//     }
-//   );
-//   if (!response.ok) {
-//     const errorRes = await response.json();
-//     throw json(
-//       { message: errorRes.error.message },
-//       { status: errorRes.error.status }
-//     );
-//   }
-
-//   if (response.status === 404) {
-//     throw json({ message: "Page Not Found" });
-//   }
-
-//   const jsonRespnse = await response.json();
-//   return jsonRespnse;
-// };

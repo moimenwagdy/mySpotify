@@ -1,5 +1,4 @@
 import { myToken } from "./setFutureDate";
-
 import { FetchError } from "./interfaces";
 
 const categoriesFetch = async ({
@@ -28,6 +27,7 @@ const categoriesFetch = async ({
 
   if (!response.ok) {
     const error = await response.json();
+    console.log(error);
     const res = new FetchError(error.error);
     throw res;
   }

@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const playlistPages = createSlice({
   name: "playlistPages",
-  initialState: { offsetDefaultVal: 10 },
+  initialState: {
+    offsetDefaultVal: 8,
+    playlistDetails: undefined,
+  },
   reducers: {},
 });
 
 export default playlistPages;
 
-export const exitAction = playlistPages.actions;
+export const pagesAction = playlistPages.actions;

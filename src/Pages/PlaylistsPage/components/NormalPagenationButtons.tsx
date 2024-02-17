@@ -1,32 +1,31 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import playlistType from "../Types";
 import { useAppSelector } from "../../../stateRoot/reduxHooks";
 
 const NormalPagenationButtons: React.FC<{
   offset: string;
-  playlist: playlistType;
-}> = ({ offset, playlist }) => {
+}> = ({ offset }) => {
   const params = useParams();
   const id = params.id;
   const defaultOffset = useAppSelector(
     (state) => state.playlistPages.offsetDefaultVal
   );
+  const data = useAppSelector(
+    (state) => state.playlistResponseSlice.data.playlist
+  );
   return (
     <aside className="lg:hidden flex justify-center gap-x-10 ">
       <Link
-        to={`/playlists/${id}/?limit=${defaultOffset}&offset=${
+        to={`/playlists/${id}?limit=${defaultOffset}&offset=${
           Number(offset) - defaultOffset
         }`}>
-        <button disabled={playlist.playlists.previous === null}>
-          previous
-        </button>
+        <button disabled={data.previous === null}>previous</button>
       </Link>
       <Link
-        to={`/playlists/${id}/?limit=${defaultOffset}&offset=${
+        to={`/playlists/${id}?limit=${defaultOffset}&offset=${
           Number(offset) + defaultOffset
         }`}>
-        <button disabled={playlist.playlists.next === null}>next</button>
+        <button disabled={data.next === null}>next</button>
       </Link>
     </aside>
   );

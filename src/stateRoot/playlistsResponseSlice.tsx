@@ -1,48 +1,27 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import playlistData from "../Pages/PlaylistsPage/Types";
 
-export interface playlistIte {
-  description: string;
-  href: string;
-  id: string;
-  images: { url: string }[];
-  name: string;
-  owner: { display_name: string };
-  tracks: { href: string; total: number };
-}
-
-interface playlistTyp {
-  playlists: {
-    items: playlistIte[];
-    limit: number;
-    offset: number;
-    next: string;
-    previous: string;
-    total: string;
-  };
-  message: string;
-}
-
-const initial: playlistTyp = {
-  playlists: {
-    items: [],
-    limit: 0,
-    next: "",
-    offset: 0,
-    previous: "",
-    total: "",
+const initial: playlistData = {
+  data: {
+    message: "",
+    playlist: {
+      items: [],
+      limit: 0,
+      offset: 0,
+      next: "",
+      previous: "",
+      total: "",
+    },
   },
-  message: "",
 };
+
 const playlistsResponseSlice = createSlice({
   name: "playlistsResponseSlice",
   initialState: initial,
   reducers: {
-    setPlaylistData: (
-      state,
-      action: PayloadAction<{ playlists: playlistTyp }>
-    ) => {
-      state.playlists = action.payload.playlists.playlists;
-      state.message = action.payload.playlists.message;
+    setPlaylistData: (state, action) => {
+      state.data.playlist = action.payload.playlists;
+      state.data.message = action.payload.message;
     },
   },
 });

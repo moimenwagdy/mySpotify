@@ -1,5 +1,5 @@
 const Artists = () => {
-  return <div>Artists</div>;
+  return <div>Artistgggs</div>;
 };
 
 export default Artists;

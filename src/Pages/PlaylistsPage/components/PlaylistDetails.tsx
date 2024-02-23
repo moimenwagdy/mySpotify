@@ -91,7 +91,7 @@ const PlaylistDetails = () => {
                             loading="lazy"></iframe>
                           <nav className="flex justify-between text-sm items-center w-[90%] gap-x-3">
                             <p className="text-lightGreen  rounded-md my-1 bg-dark px-2">
-                             By - {track.track.artists[0].name}
+                              By - {track.track.artists[0].name}
                             </p>
                             <div className="flex text-lightGreen gap-x-1 ">
                               <button className="bg-dark px-2 rounded-md">

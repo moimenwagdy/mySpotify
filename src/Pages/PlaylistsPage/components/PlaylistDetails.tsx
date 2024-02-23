@@ -79,9 +79,25 @@ const PlaylistDetails = () => {
               }}
               initial="hidden"
               animate="visible"
-              className="w-full min-h-[650px] bg-lightGreen rounded-xl mt-2">
+              className="w-full min-h-[780px] bg-lightGreen rounded-xl mt-2">
+              <div className="flex w-[50%] mx-auto justify-around items-center pt-1">
+                <button
+                  className="text-black"
+                  onClick={() => {
+                    dispatch(playlisTracksActions.decrease());
+                  }}>
+                  Previous
+                </button>
+                <button
+                  className="text-black"
+                  onClick={() => {
+                    dispatch(playlisTracksActions.increase());
+                  }}>
+                  Next
+                </button>
+              </div>
               <div className="w-[96%] mx-auto flex flex-col md:flex-row gap-x-2 ">
-                <div className=" md:bg-secondryColor/50  rounded-xl mt-4 md:mt-6 w-2/5 mx-auto lg:mx-0 flex flex-col-reverse gap-y-2 justify-center items-center md:min-h-[650px]">
+                <div className=" md:bg-secondryColor/50  rounded-xl mt-4 md:mt-6 w-2/5 mx-auto lg:mx-0 flex flex-col-reverse gap-y-2 justify-center items-center md:min-h-[780px]">
                   {/* // path={`/playlists/${PreviousUrlId}?offset=${
                     //   offset ? offset : 0
                     // }&limit=${limit ? limit : defaultOffset}`}
@@ -103,18 +119,6 @@ const PlaylistDetails = () => {
                   {content}
                 </div>
               </div>
-              <button
-                onClick={() => {
-                  dispatch(playlisTracksActions.increase());
-                }}>
-                increase
-              </button>
-              <button
-                onClick={() => {
-                  dispatch(playlisTracksActions.decrease());
-                }}>
-                decrease
-              </button>
             </motion.div>
           );
         }}

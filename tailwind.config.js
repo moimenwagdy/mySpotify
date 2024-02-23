@@ -18,7 +18,7 @@ export default {
         lgImg: "url('./images/wide2.jpg')",
       },
       fontFamily: {
-        "rubik": "Rubik",
+        rubik: "Rubik",
       },
     },
   },

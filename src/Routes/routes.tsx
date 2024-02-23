@@ -49,6 +49,8 @@ const route = createBrowserRouter([
               const myNextParam = NexturlParams.get("offset");
               const CurrenturlParams = new URLSearchParams(nextUrl.search);
               const myCurrentParam = CurrenturlParams.get("offset");
+              console.log(myCurrentParam);
+              console.log(myNextParam);
               return myNextParam !== null || myCurrentParam !== null;
             },
             children: [

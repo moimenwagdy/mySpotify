@@ -9,7 +9,7 @@ import {
 } from "../utllties/apiCredintials";
 import { myToken } from "../utllties/setFutureDate";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 const Welcome = () => {
   const token = myToken();
   console.log(token);
@@ -44,7 +44,7 @@ const Welcome = () => {
                   title="Log In"></Button>
               </a>
             </div>
-            <Link to="/home"> To Home</Link>
+            {/* <Link to="/home"> To Home</Link> */}
           </motion.section>
         </main>
       )}

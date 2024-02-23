@@ -18,6 +18,7 @@ import { playlisTracksActions } from "../../../stateRoot/playlistTracksSlice";
 import { queryClient } from "../../../utllties/queryClient";
 import { FetchError } from "../../../utllties/interfaces";
 import { motion } from "framer-motion";
+import TrackItem from "./TrackItem";
 
 const PlaylistDetails = () => {
   const { playlistDetails }: playlistDetails =
@@ -34,13 +35,34 @@ const PlaylistDetails = () => {
   const dispatch = useAppDispatch();
   const offset = useAppSelector((state) => state.playlistTracksSlice.offset);
   console.log(offset);
-  const { data: tracksData }: UseQueryResult<tracks, FetchError> = useQuery({
+  const {
+    data: tracksData,
+    error: tracksError,
+    isError,
+    isLoading,
+    isFetched,
+  }: UseQueryResult<tracks, FetchError> = useQuery({
     queryKey: [offset],
     queryFn: () => getTracks(playlisID!, offset),
     enabled: queryClient.getQueryData([offset]) !== offset,
   });
 
   console.log(tracksData?.items[0].track.artists[0].name);
+
+  let content = (
+    <>
+      {isFetched &&
+        tracksData!.items.map((track) => {
+          return <TrackItem track={track.track} key={track.track.id} />;
+        })}
+    </>
+  );
+  if (isError) {
+    content = <ErrorFallback ErrorData={tracksError.data} />;
+  }
+  if (isLoading) {
+    content = <LoadingIndecator />;
+  }
 
   return (
     <Suspense fallback={<LoadingIndecator />}>
@@ -64,11 +86,11 @@ const PlaylistDetails = () => {
                     //   offset ? offset : 0
                     // }&limit=${limit ? limit : defaultOffset}`}
                   // style={`background-image: url()`} */}
-                  <div className="bg-dark px-6 py-1 rounded-md">
-                    <p className="text-sm  text-center text-lightGreen ">
+                  <div className=" px-6 py-1 rounded-md">
+                    <p className="text-sm  text-center text-white ">
                       Followers {data.followers.total}
                     </p>
-                    <p className="text-sm  text-center text-lightGreen ">
+                    <p className="text-sm  text-center text-white ">
                       {data.tracks.total} Tracks
                     </p>
                   </div>
@@ -78,36 +100,7 @@ const PlaylistDetails = () => {
                     className="rounded-md w-[400px]"></img>
                 </div>
                 <div className="bg-dark p-2 rounded-xl me-2 mt-6 w-full md:w-3/5  flex flex-col justify-around  items-center mx-auto">
-                  {tracksData ? (
-                    tracksData.items.map((track) => {
-                      return (
-                        <>
-                          <iframe
-                            key={track.track.id}
-                            className="w-full  mx-auto rounded-xl"
-                            src={`https://open.spotify.com/embed/track/${track.track.id}?utm_source=generator`}
-                            height="80"
-                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                            loading="lazy"></iframe>
-                          <nav className="flex justify-between text-sm items-center w-[90%] gap-x-3">
-                            <p className="text-lightGreen  rounded-md my-1 bg-dark px-2">
-                              By - {track.track.artists[0].name}
-                            </p>
-                            <div className="flex text-lightGreen gap-x-1 ">
-                              <button className="bg-dark px-2 rounded-md">
-                                Albums
-                              </button>
-                              <button className="bg-dark px-2 rounded-md">
-                                Details
-                              </button>
-                            </div>
-                          </nav>
-                        </>
-                      );
-                    })
-                  ) : (
-                    <LoadingIndecator />
-                  )}
+                  {content}
                 </div>
               </div>
               <button

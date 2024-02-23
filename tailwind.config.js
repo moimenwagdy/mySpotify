@@ -14,8 +14,8 @@ export default {
       },
       backgroundImage: {
         smImg: "url('../../images/sm.jpg')",
-        mdImg: "url('./images/md.jpg')",
-        lgImg: "url('./images/wide2.jpg')",
+        mdImg: "url('../../images/md.jpg')",
+        lgImg: "url('../../images/wide2.jpg')",
       },
       fontFamily: {
         rubik: "Rubik",

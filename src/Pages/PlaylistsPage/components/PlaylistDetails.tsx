@@ -51,7 +51,7 @@ const PlaylistDetails = () => {
           return (
             <div className="w-full bg-lightGreen/70 min-h-[650px]">
               <div className="flex flex-col md:flex-row">
-                <div className="mt-4 md:mt-0 w-2/5 mx-auto lg:mx-0 flex flex-col gap-y-2 justify-center items-center min-h-[650px]">
+                <div className="mt-4 md:mt-0 w-2/5 mx-auto lg:mx-0 flex flex-col gap-y-2 justify-center items-center md:min-h-[650px]">
                   {/* // path={`/playlists/${PreviousUrlId}?offset=${
                     //   offset ? offset : 0
                     // }&limit=${limit ? limit : defaultOffset}`}

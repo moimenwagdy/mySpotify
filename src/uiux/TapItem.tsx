@@ -6,7 +6,7 @@ const TapItem: React.FC<{
   main?: boolean;
 }> = ({ title, destination, main }) => {
   return (
-    <li className="py-2 text-center text-sm md:text-lg ">
+    <li className="py-2 text-center text-sm ">
       <NavLink
         to={destination}
         className={({ isActive }) => {

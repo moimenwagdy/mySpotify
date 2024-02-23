@@ -25,7 +25,7 @@ export default interface playlistData {
 }
 export interface track {
   album: string;
-  artists: string;
+  artists: {name:string}[];
   duration_ms: number;
   href: string;
   id: string;

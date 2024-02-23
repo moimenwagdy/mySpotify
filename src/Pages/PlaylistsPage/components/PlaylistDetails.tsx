@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../../stateRoot/reduxHooks";
 import { playlisTracksActions } from "../../../stateRoot/playlistTracksSlice";
 import { queryClient } from "../../../utllties/queryClient";
 import { FetchError } from "../../../utllties/interfaces";
+import { motion } from "framer-motion";
 
 const PlaylistDetails = () => {
   const { playlistDetails }: playlistDetails =
@@ -39,7 +40,7 @@ const PlaylistDetails = () => {
     enabled: queryClient.getQueryData([offset]) !== offset,
   });
 
-  console.log(tracksData?.items[0].track.name);
+  console.log(tracksData?.items[0].track.artists[0].name);
 
   return (
     <Suspense fallback={<LoadingIndecator />}>
@@ -49,37 +50,59 @@ const PlaylistDetails = () => {
             return <ErrorFallback ErrorData={data} />;
           }
           return (
-            <div className="w-full bg-lightGreen/70 min-h-[650px]">
-              <div className="flex flex-col md:flex-row">
-                <div className="mt-4 md:mt-0 w-2/5 mx-auto lg:mx-0 flex flex-col gap-y-2 justify-center items-center md:min-h-[650px]">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: -30 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              initial="hidden"
+              animate="visible"
+              className="w-full min-h-[650px] bg-lightGreen rounded-xl mt-2">
+              <div className="w-[96%] mx-auto flex flex-col md:flex-row gap-x-2 ">
+                <div className=" md:bg-secondryColor/50  rounded-xl mt-4 md:mt-6 w-2/5 mx-auto lg:mx-0 flex flex-col-reverse gap-y-2 justify-center items-center md:min-h-[650px]">
                   {/* // path={`/playlists/${PreviousUrlId}?offset=${
                     //   offset ? offset : 0
                     // }&limit=${limit ? limit : defaultOffset}`}
                   // style={`background-image: url()`} */}
-                  <div className="">
-                    <p className="text-xs  text-center text-white">
+                  <div className="bg-dark px-6 py-1 rounded-md">
+                    <p className="text-sm  text-center text-lightGreen ">
                       Followers {data.followers.total}
                     </p>
-                    <p className="text-xs  text-center text-white">
+                    <p className="text-sm  text-center text-lightGreen ">
                       {data.tracks.total} Tracks
                     </p>
                   </div>
                   <img
                     src={`${data.images[0].url}`}
                     alt="PlayListIcon"
-                    className="rounded-md"></img>
+                    className="rounded-md w-[400px]"></img>
                 </div>
-                <div className="mt-6 w-full md:w-3/5 gap-y-2 flex flex-col justify-center items mx-auto">
+                <div className="bg-dark p-2 rounded-xl me-2 mt-6 w-full md:w-3/5  flex flex-col justify-around  items-center mx-auto">
                   {tracksData ? (
                     tracksData.items.map((track) => {
                       return (
-                        <iframe
-                          key={track.track.id}
-                          className="w-[95%] md:w-[80%] mx-auto"
-                          src={`https://open.spotify.com/embed/track/${track.track.id}?utm_source=generator`}
-                          height="80"
-                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                          loading="lazy"></iframe>
+                        <>
+                          <iframe
+                            key={track.track.id}
+                            className="w-full  mx-auto rounded-xl"
+                            src={`https://open.spotify.com/embed/track/${track.track.id}?utm_source=generator`}
+                            height="80"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"></iframe>
+                          <nav className="flex justify-between text-sm items-center w-[90%] gap-x-3">
+                            <p className="text-lightGreen  rounded-md my-1 bg-dark px-2">
+                             By - {track.track.artists[0].name}
+                            </p>
+                            <div className="flex text-lightGreen gap-x-1 ">
+                              <button className="bg-dark px-2 rounded-md">
+                                Albums
+                              </button>
+                              <button className="bg-dark px-2 rounded-md">
+                                Details
+                              </button>
+                            </div>
+                          </nav>
+                        </>
                       );
                     })
                   ) : (
@@ -99,7 +122,7 @@ const PlaylistDetails = () => {
                 }}>
                 decrease
               </button>
-            </div>
+            </motion.div>
           );
         }}
       </Await>

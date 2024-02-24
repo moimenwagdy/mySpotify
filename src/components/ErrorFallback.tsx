@@ -7,8 +7,10 @@ const ErrorFallback: React.FC<{ ErrorData?: errorContent }> = ({
   ErrorData,
 }) => {
   const error = useRouteError() as errorContent;
-  let title: string = "";
-  console.log(title);
+  let title: string = error.message;
+  console.log(ErrorData?.message);
+  console.log(error.message);
+  console.log(isRouteErrorResponse(error));
   if (isRouteErrorResponse(error)) {
     if (error.data.message) {
       title = error.data.message;
@@ -16,6 +18,7 @@ const ErrorFallback: React.FC<{ ErrorData?: errorContent }> = ({
     } else {
       if (error && error.data) {
         title = error.data;
+        console.log(error);
       } else title = error.statusText;
       console.log(error);
     }

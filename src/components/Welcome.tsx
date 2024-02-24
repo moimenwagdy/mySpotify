@@ -40,7 +40,7 @@ const Welcome = () => {
                 <Button
                   onClick={exitHandle}
                   mainButton
-                  className="bg-dark text-lightGreen"
+                  className="bg-lightGreen/10 outline-3 outline outline-dark text-dark"
                   title="Log In"></Button>
               </a>
             </div>

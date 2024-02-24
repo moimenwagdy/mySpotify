@@ -25,7 +25,7 @@ export default interface playlistData {
 }
 export interface track {
   album: string;
-  artists: {name:string}[];
+  artists: { name: string }[];
   duration_ms: number;
   href: string;
   id: string;
@@ -47,7 +47,7 @@ export interface tracks {
   offset: number;
   next: string;
   previous: string;
-  total: string;
+  total: number;
 }
 
 export interface playlistDetails {

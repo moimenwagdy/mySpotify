@@ -47,7 +47,6 @@ const PlaylistDetails = () => {
     enabled: queryClient.getQueryData([offset]) !== offset,
   });
 
-  console.log(tracksData?.items[0].track.artists[0].name);
 
   let content = (
     <>

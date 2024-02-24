@@ -1,12 +1,14 @@
 import { playlisTracksActions } from "../../../stateRoot/playlistTracksSlice";
 import { useAppDispatch, useAppSelector } from "../../../stateRoot/reduxHooks";
-import { tracks } from "../Types";
+import { tracks } from "../types/Types";
 
 const PlaylistTracksNavigationButtons: React.FC<{
   isLoading: boolean;
   data: tracks;
   tracksData: tracks;
 }> = ({ data, isLoading, tracksData }) => {
+  const disableNext: boolean = tracksData && tracksData.next === null;
+  const disablePrevious: boolean = tracksData && tracksData.previous === null;
   const offset = useAppSelector((state) => state.playlistTracksSlice.offset);
   const dispatch = useAppDispatch();
   console.log(tracksData);
@@ -14,16 +16,24 @@ const PlaylistTracksNavigationButtons: React.FC<{
     <div className={`${isLoading && "hidden"} justify-end flex w-full pt-1`}>
       <div className="w-2/4 flex justify-around">
         <button
-          disabled={tracksData && tracksData.previous === null}
-          className="text-white"
+          disabled={disablePrevious}
+          className={` hover:text-lightGreen ${
+            disablePrevious
+              ? "hover:text-simiDark/50 text-simiDark/50"
+              : "text-white"
+          }`}
           onClick={() => {
             dispatch(playlisTracksActions.decrease());
           }}>
           Previous
         </button>
         <button
-          disabled={tracksData && tracksData.next === null}
-          className="text-white"
+          disabled={disableNext}
+          className={` hover:text-lightGreen ${
+            disableNext
+              ? "hover:text-simiDark/50 text-simiDark/50"
+              : "text-white"
+          }`}
           onClick={() => {
             dispatch(playlisTracksActions.increase());
           }}>

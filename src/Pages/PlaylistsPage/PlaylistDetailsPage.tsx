@@ -5,62 +5,60 @@ import {
   defer,
   useLoaderData,
 } from "react-router";
-import { myToken } from "../../../utllties/setFutureDate";
-import { Suspense } from "react";
-import LoadingIndecator from "../../../components/LoadingIndecator";
-import { playlistDetails, tracks } from "../Types";
-import ErrorFallback from "../../../components/ErrorFallback";
+import { myToken } from "../../utllties/setFutureDate";
+import { Suspense, useEffect } from "react";
+import LoadingIndecator from "../../components/LoadingIndecator";
+import { playlistDetails, tracks } from "./types/Types";
+import ErrorFallback from "../../components/ErrorFallback";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import { getTracks } from "../getTracks";
+import { getTracks } from "./functions/getTracks";
 import { useSearchParams } from "react-router-dom";
-import { useAppSelector } from "../../../stateRoot/reduxHooks";
-import { queryClient } from "../../../utllties/queryClient";
-import { FetchError } from "../../../utllties/interfaces";
+import { useAppDispatch, useAppSelector } from "../../stateRoot/reduxHooks";
+import { queryClient } from "../../utllties/queryClient";
+import { errorContent } from "../../utllties/interfaces";
 import { motion } from "framer-motion";
-import TrackItem from "./TrackItem";
-import PlaylistTracksNavigationButtons from "./PlaylistTracksNavigationButtons";
-import PlaylistTracksImagedetails from "./PlaylistTracksImagedetails";
+import TrackItem from "./components/TrackItem";
+import PlaylistTracksNavigationButtons from "./components/PlaylistTracksNavigationButtons";
+import PlaylistTracksImagedetails from "./components/PlaylistTracksImagedetails";
+import { exitAction } from "../../stateRoot/exitSlice";
 
-const PlaylistDetails = () => {
+const PlaylistDetailsPage = () => {
+  const dispatch = useAppDispatch();
   const { playlistDetails }: playlistDetails =
     useLoaderData() as playlistDetails;
-  // const params = useParams();
-  // const PreviousUrlId = params.id;
-  // const offset = localStorage.getItem("offset");
-  // const limit = localStorage.getItem("limit");
+  useEffect(() => {
+    dispatch(exitAction.notExit());
+  });
   // const defaultOffset = useAppSelector(
   // (state) => state.playlistPages.offsetDefaultVal
   // );
   const [params] = useSearchParams();
   const playlisID = params.get("pListId");
   const offset = useAppSelector((state) => state.playlistTracksSlice.offset);
-  console.log(offset);
+
   const {
     data: tracksData,
     error: tracksError,
     isError,
     isLoading,
     isFetched,
-  }: UseQueryResult<tracks, FetchError> = useQuery({
+  }: UseQueryResult<tracks, errorContent> = useQuery({
     queryKey: [offset],
     queryFn: () => getTracks(playlisID!, offset),
     enabled: queryClient.getQueryData([offset]) !== offset,
   });
 
-
   let content = (
     <>
       {isFetched &&
+        !isError &&
+        tracksData &&
         tracksData!.items.map((track) => {
           return <TrackItem track={track.track} key={track.track.id} />;
         })}
     </>
   );
-  if (isError) {
-    console.log(tracksError.message);
 
-    content = <ErrorFallback ErrorData={tracksError.data} />;
-  }
   if (isLoading) {
     content = <LoadingIndecator />;
   }
@@ -70,11 +68,13 @@ const PlaylistDetails = () => {
       <Await resolve={playlistDetails}>
         {(data) => {
           if (data.error) {
-            return <ErrorFallback ErrorData={data} />;
+            return <ErrorFallback ErrorData={data.error} />;
+          }
+          if (isError) {
+            return <ErrorFallback ErrorData={tracksError} />;
           }
           return (
             <motion.div
-             
               variants={{
                 hidden: { opacity: 0, y: -30 },
                 visible: { opacity: 1, y: 0 },
@@ -88,7 +88,9 @@ const PlaylistDetails = () => {
                   image={data.images[0].url}
                   followers={data.followers.total}
                 />
-                <div  key={offset} className="bg-dark/90 p-2 rounded-xl me-2 mt-6 w-full md:w-3/5  flex flex-col justify-around  items-center mx-auto">
+                <div
+                  key={offset}
+                  className="bg-dark/90 p-2 rounded-xl me-2 mt-6 w-full md:w-3/5  flex flex-col justify-around  items-center mx-auto">
                   <PlaylistTracksNavigationButtons
                     isLoading={isLoading}
                     data={data.tracks}
@@ -105,7 +107,7 @@ const PlaylistDetails = () => {
   );
 };
 
-export default PlaylistDetails;
+export default PlaylistDetailsPage;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const getDetails: LoaderFunction = async ({
@@ -125,7 +127,7 @@ export const getDetails: LoaderFunction = async ({
     }
   );
 
-  const resolved = response.json();
+  const resolved = await response.json();
   return resolved;
 };
 

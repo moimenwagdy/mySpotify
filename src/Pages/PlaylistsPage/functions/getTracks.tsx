@@ -1,5 +1,4 @@
-import { FetchError } from "../../utllties/interfaces";
-import { myToken } from "../../utllties/setFutureDate";
+import { myToken } from "../../../utllties/setFutureDate";
 
 export const getTracks = async function (playlistID: string, offset: number) {
   const tokens = myToken();
@@ -14,15 +13,12 @@ export const getTracks = async function (playlistID: string, offset: number) {
     }
   );
   if (response.status === 404) {
-    const res = new FetchError({ message: "Page Not Found", status: 404 });
-    throw res;
+    throw { message: "Page Not Found", status: 404 };
   }
 
   if (!response.ok) {
     const error = await response.json();
-    console.log(error);
-    const res = new FetchError(error.error);
-    throw res;
+    throw error.error;
   }
 
   const jsonRespnse = response.json();

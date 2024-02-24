@@ -3,7 +3,7 @@ import { faForward, faBackward } from "@fortawesome/free-solid-svg-icons";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import categoriesFetch from "../../utllties/categoriesFetch";
 import { useState } from "react";
-import { CategoriesResponse, FetchError } from "../../utllties/interfaces";
+import { CategoriesResponse, errorContent } from "../../utllties/interfaces";
 import { queryClient } from "../../utllties/queryClient";
 import Categories from "./components/Categories";
 import { motion } from "framer-motion";
@@ -17,7 +17,7 @@ const CategoriesPage = () => {
     isError,
     error,
     isLoading,
-  }: UseQueryResult<CategoriesResponse, FetchError> = useQuery({
+  }: UseQueryResult<CategoriesResponse, errorContent> = useQuery({
     queryKey: ["categories", offset],
     queryFn: ({ signal }) => categoriesFetch({ signal, offset }),
     enabled: queryClient.getQueryData([offset]) !== offset,
@@ -86,8 +86,8 @@ const CategoriesPage = () => {
   }
 
   if (isError) {
-   
-    content = <ErrorFallback ErrorData={error.data} />;
+    console.log(error);
+    content = <ErrorFallback ErrorData={error} />;
   }
 
   return <>{content}</>;

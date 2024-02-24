@@ -8,10 +8,10 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../../stateRoot/reduxHooks";
 import PlaylistItem from "./PlaylistItem";
-import { StyledPagenationButtons } from "./StyledPagenationButtons";
+import { StyledPlaylistPagenationButtons } from "./StyledPlaylistPagenationButtons";
 import { myToken } from "../../../utllties/setFutureDate";
 import playlistsResponseSlice from "../../../stateRoot/playlistsResponseSlice";
-import playlistData from "../Types";
+import playlistData from "../types/Types";
 
 const PlaylistItems: React.FC = () => {
   const { data: playlistsData } = useRouteLoaderData("CPL") as playlistData;
@@ -45,13 +45,13 @@ const PlaylistItems: React.FC = () => {
             className={`hidden  w-[96%] left-[50%] z-[1] -translate-x-1/2 lg:flex ${
               data.previous === null ? "justify-end" : "justify-between"
             }  absolute top-[50%] -translate-y-1/2`}>
-            <StyledPagenationButtons
+            <StyledPlaylistPagenationButtons
               key="left"
               title="Prev"
               offset={Number(offset) - defaultOffset}
               hidden={data.previous === null}
             />
-            <StyledPagenationButtons
+            <StyledPlaylistPagenationButtons
               key="right"
               title="Next"
               offset={Number(offset) + defaultOffset}

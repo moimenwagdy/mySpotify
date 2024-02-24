@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { exitAction } from "../../../stateRoot/exitSlice";
 import { useAppDispatch, useAppSelector } from "../../../stateRoot/reduxHooks";
-import { playlistContent } from "../Types";
+import { playlistContent } from "../types/Types";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../uiux/Button";
 import { useEffect } from "react";

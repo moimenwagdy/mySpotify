@@ -1,40 +1,39 @@
 import { isRouteErrorResponse, useRouteError } from "react-router";
 import Button from "../uiux/Button";
-import { Link } from "react-router-dom";
 import { errorContent } from "../utllties/interfaces";
+import DialogModal from "./DialogModal";
 
 const ErrorFallback: React.FC<{ ErrorData?: errorContent }> = ({
   ErrorData,
 }) => {
   const error = useRouteError() as errorContent;
-  let title: string = error.message;
-  console.log(ErrorData?.message);
-  console.log(error.message);
-  console.log(isRouteErrorResponse(error));
-  if (isRouteErrorResponse(error)) {
-    if (error.data.message) {
-      title = error.data.message;
-      console.log(error);
-    } else {
-      if (error && error.data) {
-        title = error.data;
-        console.log(error);
-      } else title = error.statusText;
-      console.log(error);
-    }
-  }
+  let title: string = "";
   if (ErrorData) {
+    console.log("it is an ErrorData From Props");
     title = ErrorData?.message;
-    console.log(ErrorData);
   }
-
+  if (!ErrorData && error) {
+    title = error.message;
+  }
+  console.log(error);
+  if (isRouteErrorResponse(error)) {
+    title = error.statusText;
+    console.log("it s is a Route Error Witch You Are searching for and still");
+  }
+  function backControl() {
+    history.back();
+  }
   return (
-    <div className="flex flex-col justify-center items-center mt-24 gap-y-6">
-      <div className="text-center text-white">{title}</div>
-      <Link to="/home" className="">
-        <Button title="Back" className="bg-light text-dark px-3" />
-      </Link>
-    </div>
+    <DialogModal>
+      <div className="flex flex-col justify-center items-center mt-24 gap-y-6">
+        <p className="text-center text-white">{title}</p>
+        <Button
+          onClick={backControl}
+          title="Back"
+          className="bg-light text-dark px-3"
+        />
+      </div>
+    </DialogModal>
   );
 };
 

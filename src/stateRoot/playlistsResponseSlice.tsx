@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import playlistData from "../Pages/PlaylistsPage/Types";
+import playlistData from "../Pages/PlaylistsPage/types/Types";
 
 const initial: playlistData = {
   data: {

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { LoaderFunction, createBrowserRouter } from "react-router-dom";
 import WelcomePage from "../Pages/WelcomePage";
 import HomePage from "../Pages/HomePage";
 import { loader as authLoader } from "../Pages/HomePage";
@@ -10,11 +10,12 @@ import Search from "../Pages/Search";
 import PlayListsPage from "../Pages/PlaylistsPage/PlayListsPage";
 import ErrorFallback from "../components/ErrorFallback";
 import { loader } from "../Pages/PlaylistsPage/components/PlaylistItems";
-import UserPlaylist from "../Pages/UserPlaylist";
-import CategoriesPlaylistContainer from "../Pages/PlaylistsPage/CategoriesPlaylistContainer";
-import PlaylistDetails, {
+import CategoryPlaylistsContainerPage from "../Pages/PlaylistsPage/CategoryPlaylistsContainerPage";
+import PlaylistDetailsPage, {
   loader as playlistDetailsLoader,
-} from "../Pages/PlaylistsPage/components/PlaylistDetails";
+} from "../Pages/PlaylistsPage/PlaylistDetailsPage";
+import { myToken } from "../utllties/setFutureDate";
+
 // import { current } from "@reduxjs/toolkit";
 const route = createBrowserRouter([
   {
@@ -39,7 +40,27 @@ const route = createBrowserRouter([
       {
         path: "playlists",
         children: [
-          { index: true, element: <PlayListsPage /> },
+          {
+            index: true,
+            element: <PlayListsPage />,
+            loader: async (): Promise<LoaderFunction> => {
+              const tokens = myToken();
+              const userToken = tokens?.userToken;
+              const nonUserToken = tokens?.nonUserToken;
+              const response = await fetch(
+                "https://api.spotify.com/v1/me/playlists",
+                {
+                  headers: {
+                    Authorization:
+                      "Bearer " + (userToken ? userToken : nonUserToken),
+                  },
+                }
+              );
+              const myData = response.json();
+              console.log(myData);
+              return myData;
+            },
+          },
           {
             path: ":id?",
             loader: loader,
@@ -54,18 +75,16 @@ const route = createBrowserRouter([
               return myNextParam !== null || myCurrentParam !== null;
             },
             children: [
-              { index: true, element: <CategoriesPlaylistContainer /> },
+              { index: true, element: <CategoryPlaylistsContainerPage /> },
               {
                 path: "playlistdetails",
-                element: <PlaylistDetails />,
+                element: <PlaylistDetailsPage />,
                 loader: playlistDetailsLoader,
               },
             ],
           },
         ],
       },
-
-      { path: "userplaylist", element: <UserPlaylist /> },
     ],
   },
 

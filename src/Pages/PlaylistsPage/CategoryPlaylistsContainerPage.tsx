@@ -4,13 +4,13 @@ import { Await, useNavigate, useRouteLoaderData } from "react-router";
 import { Suspense, useEffect, useState } from "react";
 import LoadingIndecator from "../../components/LoadingIndecator";
 import PlaylistItems from "./components/PlaylistItems";
-import NormalPagenationButtons from "./components/NormalPagenationButtons";
+import NormalPlaylistPagenationButtons from "./components/NormalPlaylistPagenationButtons";
 import { useSearchParams } from "react-router-dom";
 import ErrorFallback from "../../components/ErrorFallback";
-import playlistData from "./Types";
+import playlistData from "./types/Types";
 import { AnimatePresence, motion } from "framer-motion";
 
-const CategoriesPlaylistContainer = () => {
+const CategoryPlaylistsContainerPage = () => {
   const [myOffset, setMyOffset] = useState<string>("10");
   const dispatch = useAppDispatch();
   const { data } = useRouteLoaderData("CPL") as playlistData;
@@ -28,8 +28,10 @@ const CategoriesPlaylistContainer = () => {
   }
   useEffect(() => {
     setMyOffset(offset);
-  }, [offset]);
+  
+  }, [ offset]);
   const exit = useAppSelector((state) => state.exitSlice.exiting);
+  console.log(exit);
   const playlistData = useAppSelector(
     (state) => state.playlistResponseSlice.data.playlist
   );
@@ -58,7 +60,7 @@ const CategoriesPlaylistContainer = () => {
                     <aside className="flex justify-between items-center w-full">
                       <div className="ms-[50%] -translate-x-[50%]">
                         {Number(playlistData.total) > 10 && (
-                          <NormalPagenationButtons offset={offset} />
+                          <NormalPlaylistPagenationButtons offset={offset} />
                         )}
                       </div>
                       <p className="">
@@ -72,7 +74,7 @@ const CategoriesPlaylistContainer = () => {
                   </section>
                   <PlaylistItems key={myOffset} />
                   {Number(playlistData.total) > 10 && (
-                    <NormalPagenationButtons offset={offset} />
+                    <NormalPlaylistPagenationButtons offset={offset} />
                   )}
                   <p
                     onClick={backToCateg}
@@ -89,4 +91,4 @@ const CategoriesPlaylistContainer = () => {
   );
 };
 
-export default CategoriesPlaylistContainer;
+export default CategoryPlaylistsContainerPage;

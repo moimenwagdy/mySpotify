@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../stateRoot/reduxHooks";
 
-const NormalPagenationButtons: React.FC<{
+const NormalPlaylistPagenationButtons: React.FC<{
   offset: string;
 }> = ({ offset }) => {
   const params = useParams();
@@ -31,4 +31,4 @@ const NormalPagenationButtons: React.FC<{
   );
 };
 
-export default NormalPagenationButtons;
+export default NormalPlaylistPagenationButtons;

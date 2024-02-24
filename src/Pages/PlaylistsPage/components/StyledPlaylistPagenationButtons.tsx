@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../stateRoot/reduxHooks";
-export const StyledPagenationButtons: React.FC<{
+export const StyledPlaylistPagenationButtons: React.FC<{
   title: string;
   offset: number;
   hidden: boolean;

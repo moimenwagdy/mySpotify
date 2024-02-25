@@ -25,7 +25,7 @@ const NavUserDataContainer = () => {
     submit(null, { method: "POST", action: "logout" });
   }
   if (isFetched) {
-    localStorage.setItem("userID", data.id);
+    localStorage.setItem("userID", data && data.id);
   }
   return (
     <section className="flex flex-col items-end -mb-4 mt-4  self-end me-2">

@@ -1,4 +1,4 @@
-import { LoaderFunction, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import WelcomePage from "../Pages/WelcomePage";
 import HomePage from "../Pages/HomePage";
 import { loader as authLoader } from "../Pages/HomePage";
@@ -16,7 +16,7 @@ import CategoryPlaylistsContainerPage from "../Pages/PlaylistsPage/CategoryPlayl
 import PlaylistDetailsPage, {
   loader as playlistDetailsLoader,
 } from "../Pages/PlaylistsPage/PlaylistDetailsPage";
-import { myToken } from "../utllties/tokenAndDurationControl";
+import { loader as playlistLengthCheck } from "../Pages/PlaylistsPage/components/mainPlaylistPageComponents/UsersNewPLManage";
 
 // import { current } from "@reduxjs/toolkit";
 const route = createBrowserRouter([
@@ -45,23 +45,7 @@ const route = createBrowserRouter([
           {
             index: true,
             element: <PlayListsPage />,
-            loader: async (): Promise<LoaderFunction> => {
-              const tokens = myToken();
-              const userToken = tokens?.userToken;
-              const nonUserToken = tokens?.nonUserToken;
-              const response = await fetch(
-                "https://api.spotify.com/v1/me/playlists",
-                {
-                  headers: {
-                    Authorization:
-                      "Bearer " + (userToken ? userToken : nonUserToken),
-                  },
-                }
-              );
-              const myData = response.json();
-              console.log(myData);
-              return myData;
-            },
+            loader: playlistLengthCheck,
             action: CreatePlayListAction,
           },
           {

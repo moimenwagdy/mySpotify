@@ -46,7 +46,6 @@ const PlaylistDetailsPage = () => {
     queryKey: [offset],
     queryFn: () => getTracks(playlisID!, offset),
     enabled: queryClient.getQueryData([offset]) !== offset,
-    staleTime: 20000,
   });
 
   let content = (
@@ -86,12 +85,12 @@ const PlaylistDetailsPage = () => {
               <div className="w-[96%] mx-auto flex flex-col md:flex-row gap-x-2 ">
                 <PlaylistTracksImagedetails
                   total={data.tracks.total}
-                  image={data.images[0].url}
+                  image={data.images && data.images[0].url}
                   followers={data.followers.total}
                 />
                 <div
                   key={offset}
-                  className="bg-dark/90 p-2 rounded-xl me-2 mt-6 w-full md:w-3/5  flex flex-col justify-around  items-center mx-auto">
+                  className={`bg-dark/90 p-2 rounded-xl me-2 mt-6 w-full md:w-3/5  flex flex-col  justify-start  items-center mx-auto`}>
                   <PlaylistTracksNavigationButtons
                     isLoading={isLoading}
                     data={data.tracks}

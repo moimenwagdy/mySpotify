@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const exitslice = createSlice({
   name: "exitSlice",
-  initialState: { exiting: false, modalExit: false },
+  initialState: { exiting: false, showNewPlaylistForm: false },
   reducers: {
     setExit: (state) => {
       state.exiting = true;
@@ -10,11 +10,8 @@ const exitslice = createSlice({
     notExit: (state) => {
       state.exiting = false;
     },
-    setModalExitTrue: (state) => {
-      state.modalExit = true;
-    },
-    setModalExitFalse: (state) => {
-      state.modalExit = false;
+    newPlaylisToggler: (state) => {
+      state.showNewPlaylistForm = !state.showNewPlaylistForm;
     },
   },
 });

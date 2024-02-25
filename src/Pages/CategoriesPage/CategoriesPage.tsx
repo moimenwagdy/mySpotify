@@ -22,6 +22,7 @@ const CategoriesPage = () => {
     queryFn: ({ signal }) => categoriesFetch({ signal, offset }),
     enabled: queryClient.getQueryData([offset]) !== offset,
     gcTime: 1000,
+    staleTime: 20000,
   });
 
   function increase(): void {

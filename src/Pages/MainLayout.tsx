@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import { useEffect } from "react";
-import { expirationDuration, myToken } from "../utllties/setFutureDate";
+import { expirationDuration, myToken } from "../utllties/tokenAndDurationControl";
 import { useSubmit } from "react-router-dom";
 import Header from "../components/Header";
 import NavUserDataContainer from "../uiux/NavUserDataContainer";

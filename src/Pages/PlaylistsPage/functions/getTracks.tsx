@@ -1,4 +1,4 @@
-import { myToken } from "../../../utllties/setFutureDate";
+import { myToken } from "../../../utllties/tokenAndDurationControl";
 
 export const getTracks = async function (playlistID: string, offset: number) {
   const tokens = myToken();

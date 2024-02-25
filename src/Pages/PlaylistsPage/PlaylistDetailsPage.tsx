@@ -5,7 +5,7 @@ import {
   defer,
   useLoaderData,
 } from "react-router";
-import { myToken } from "../../utllties/setFutureDate";
+import { myToken } from "../../utllties/tokenAndDurationControl";
 import { Suspense, useEffect } from "react";
 import LoadingIndecator from "../../components/LoadingIndecator";
 import { playlistDetails, tracks } from "./types/Types";
@@ -17,9 +17,9 @@ import { useAppDispatch, useAppSelector } from "../../stateRoot/reduxHooks";
 import { queryClient } from "../../utllties/queryClient";
 import { errorContent } from "../../utllties/interfaces";
 import { motion } from "framer-motion";
-import TrackItem from "./components/TrackItem";
-import PlaylistTracksNavigationButtons from "./components/PlaylistTracksNavigationButtons";
-import PlaylistTracksImagedetails from "./components/PlaylistTracksImagedetails";
+import TrackItem from "./components/playlistDetailsAndTracksComponents/TrackItem";
+import PlaylistTracksNavigationButtons from "./components/playlistDetailsAndTracksComponents/PlaylistTracksNavigationButtons";
+import PlaylistTracksImagedetails from "./components/playlistDetailsAndTracksComponents/PlaylistTracksImagedetails";
 import { exitAction } from "../../stateRoot/exitSlice";
 
 const PlaylistDetailsPage = () => {
@@ -46,6 +46,7 @@ const PlaylistDetailsPage = () => {
     queryKey: [offset],
     queryFn: () => getTracks(playlisID!, offset),
     enabled: queryClient.getQueryData([offset]) !== offset,
+    staleTime: 20000,
   });
 
   let content = (

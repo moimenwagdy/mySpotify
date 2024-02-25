@@ -7,7 +7,7 @@ import {
   responseType,
   scope,
 } from "../utllties/apiCredintials";
-import { myToken } from "../utllties/setFutureDate";
+import { myToken } from "../utllties/tokenAndDurationControl";
 import { AnimatePresence, motion } from "framer-motion";
 // import { Link } from "react-router-dom";
 const Welcome = () => {

@@ -4,7 +4,7 @@ import Button from "./Button";
 import { useSubmit } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { userProfileData } from "../utllties/userProfileData";
-import { myToken } from "../utllties/setFutureDate";
+import { myToken } from "../utllties/tokenAndDurationControl";
 import {
   endPoint,
   clientID,
@@ -15,7 +15,7 @@ userProfileData;
 const NavUserDataContainer = () => {
   const token = myToken();
   const userToken = token?.userToken;
-  const { data } = useQuery({
+  const { data, isFetched } = useQuery({
     queryKey: ["userProfileData"],
     queryFn: () => userProfileData(userToken!),
     enabled: userToken != undefined,
@@ -24,7 +24,9 @@ const NavUserDataContainer = () => {
   function logOut() {
     submit(null, { method: "POST", action: "logout" });
   }
-
+  if (isFetched) {
+    localStorage.setItem("userID", data.id);
+  }
   return (
     <section className="flex flex-col items-end -mb-4 mt-4  self-end me-2">
       {data ? (

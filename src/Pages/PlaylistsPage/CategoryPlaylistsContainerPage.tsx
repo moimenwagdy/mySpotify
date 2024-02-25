@@ -3,12 +3,13 @@ import { exitAction } from "../../stateRoot/exitSlice";
 import { Await, useNavigate, useRouteLoaderData } from "react-router";
 import { Suspense, useEffect, useState } from "react";
 import LoadingIndecator from "../../components/LoadingIndecator";
-import PlaylistItems from "./components/PlaylistItems";
-import NormalPlaylistPagenationButtons from "./components/NormalPlaylistPagenationButtons";
+import PlaylistItems from "./components/category'sPlaylistsComponents/PlaylistItems";
+import NormalPlaylistPagenationButtons from "./components/category'sPlaylistsComponents/NormalPlaylistPagenationButtons";
 import { useSearchParams } from "react-router-dom";
 import ErrorFallback from "../../components/ErrorFallback";
 import playlistData from "./types/Types";
 import { AnimatePresence, motion } from "framer-motion";
+import { playlisTracksActions } from "../../stateRoot/playlistTracksSlice";
 
 const CategoryPlaylistsContainerPage = () => {
   const [myOffset, setMyOffset] = useState<string>("10");
@@ -28,8 +29,8 @@ const CategoryPlaylistsContainerPage = () => {
   }
   useEffect(() => {
     setMyOffset(offset);
-  
-  }, [ offset]);
+    dispatch(playlisTracksActions.reset());
+  }, [offset, dispatch]);
   const exit = useAppSelector((state) => state.exitSlice.exiting);
   console.log(exit);
   const playlistData = useAppSelector(

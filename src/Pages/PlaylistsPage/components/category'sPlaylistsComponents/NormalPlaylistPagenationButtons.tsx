@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAppSelector } from "../../../stateRoot/reduxHooks";
+import { useAppSelector } from "../../../../stateRoot/reduxHooks";
 
 const NormalPlaylistPagenationButtons: React.FC<{
   offset: string;

@@ -1,4 +1,4 @@
-import { myToken } from "../../../utllties/setFutureDate";
+import { myToken } from "../../../utllties/tokenAndDurationControl";
 
 export const fetchDetails = async (id: string) => {
   const tokens = myToken();

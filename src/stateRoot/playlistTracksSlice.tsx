@@ -10,6 +10,9 @@ const playlisTracksSlice = createSlice({
     decrease: (state) => {
       state.offset -= 7;
     },
+    reset: (state) => {
+      state.offset = 0;
+    },
   },
 });
 

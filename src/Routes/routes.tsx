@@ -7,14 +7,16 @@ import MainLayout from "../Pages/MainLayout";
 import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage"; // Loader as CategoriesLoader,
 import Albums from "../Pages/Albums";
 import Search from "../Pages/Search";
-import PlayListsPage from "../Pages/PlaylistsPage/PlayListsPage";
+import PlayListsPage, {
+  action as CreatePlayListAction,
+} from "../Pages/PlaylistsPage/PlayListsPage";
 import ErrorFallback from "../components/ErrorFallback";
-import { loader } from "../Pages/PlaylistsPage/components/PlaylistItems";
+import { loader } from "../Pages/PlaylistsPage/components/category'sPlaylistsComponents/PlaylistItems";
 import CategoryPlaylistsContainerPage from "../Pages/PlaylistsPage/CategoryPlaylistsContainerPage";
 import PlaylistDetailsPage, {
   loader as playlistDetailsLoader,
 } from "../Pages/PlaylistsPage/PlaylistDetailsPage";
-import { myToken } from "../utllties/setFutureDate";
+import { myToken } from "../utllties/tokenAndDurationControl";
 
 // import { current } from "@reduxjs/toolkit";
 const route = createBrowserRouter([
@@ -60,6 +62,7 @@ const route = createBrowserRouter([
               console.log(myData);
               return myData;
             },
+            action: CreatePlayListAction,
           },
           {
             path: ":id?",

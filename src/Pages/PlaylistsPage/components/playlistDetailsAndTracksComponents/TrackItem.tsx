@@ -1,4 +1,4 @@
-import { track } from "../types/Types";
+import { track } from "../../types/Types";
 
 const TrackItem: React.FC<{ track: track }> = ({ track }) => {
   return (

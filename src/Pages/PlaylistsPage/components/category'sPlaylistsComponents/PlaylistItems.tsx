@@ -6,12 +6,12 @@ import {
   useRouteLoaderData,
 } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "../../../stateRoot/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../../stateRoot/reduxHooks";
 import PlaylistItem from "./PlaylistItem";
 import { StyledPlaylistPagenationButtons } from "./StyledPlaylistPagenationButtons";
-import { myToken } from "../../../utllties/setFutureDate";
-import playlistsResponseSlice from "../../../stateRoot/playlistsResponseSlice";
-import playlistData from "../types/Types";
+import { myToken } from "../../../../utllties/tokenAndDurationControl";
+import playlistsResponseSlice from "../../../../stateRoot/playlistsResponseSlice";
+import playlistData from "../../types/Types";
 
 const PlaylistItems: React.FC = () => {
   const { data: playlistsData } = useRouteLoaderData("CPL") as playlistData;

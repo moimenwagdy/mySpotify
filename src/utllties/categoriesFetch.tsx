@@ -1,4 +1,4 @@
-import { myToken } from "./setFutureDate";
+import { myToken } from "./tokenAndDurationControl";
 
 const categoriesFetch = async ({
   offset,

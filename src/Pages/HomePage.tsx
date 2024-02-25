@@ -2,7 +2,7 @@ import { LoaderFunction } from "react-router";
 import Home from "../components/Home";
 import { LoaderRequest } from "../utllties/interfaces";
 import getNonUserToken from "../utllties/getNonUserToken";
-import setFutureDate from "../utllties/setFutureDate";
+import setFutureDate from "../utllties/tokenAndDurationControl";
 
 const HomePage = () => {
   return (

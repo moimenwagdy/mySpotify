@@ -4,7 +4,7 @@ import HomePage from "../Pages/HomePage";
 import { loader as authLoader } from "../Pages/HomePage";
 import { action as logOutAction } from "../Pages/LogoutPage";
 import MainLayout from "../Pages/MainLayout";
-import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage"; // Loader as CategoriesLoader,
+import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage";
 import Albums from "../Pages/Albums";
 import Search from "../Pages/Search";
 import PlayListsPage, {
@@ -47,6 +47,7 @@ const route = createBrowserRouter([
             element: <PlayListsPage />,
             loader: playlistLengthCheck,
             action: CreatePlayListAction,
+            id: "test",
           },
           {
             path: ":id?",

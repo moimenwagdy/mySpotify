@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -24,9 +25,15 @@ const Header = () => {
           <div className="flex flex-col w-full me-7 gap-y-12 mt-7">
             <div className="self-end">
               <div className="w-12 flex flex-col text-center">
-                <h2 className="text-base text-white">Home</h2>
-                <h2 className="text-base text-white">Search</h2>
-                <h2 className="text-base text-white">Profile</h2>
+                <Link to="/home" className="text-base text-white">
+                  Home
+                </Link>
+                <Link to="/playlists" className="text-base text-white">
+                  playlists
+                </Link>
+                <Link to="/categories" className="text-base text-white">
+                  categories
+                </Link>
               </div>
             </div>
             <h2 className=" text-xl text-white ">Menu</h2>

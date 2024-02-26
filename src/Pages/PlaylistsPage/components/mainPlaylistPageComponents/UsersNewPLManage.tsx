@@ -25,8 +25,8 @@ const UsersNewPLManage = () => {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1 },
+        hidden: { opacity: 0, y: -30 },
+        visible: { opacity: 1, y: 0 },
       }}
       key={sudoKey}
       initial="hidden"
@@ -37,7 +37,7 @@ const UsersNewPLManage = () => {
       {!noItems && (
         <>
           <p className="text-sm text-white p-2">
-            Add Your Favorite Tracks And Enjoy Your Own Playlists
+            Add Tracks And Enjoy Your Own Playlists
           </p>
           <Link
             to="/categories"

@@ -4,7 +4,7 @@ export interface playlistItem {
   offset: number;
   next: string;
   previous: string;
-  total: string;
+  total: number;
 }
 
 export interface playlistContent {

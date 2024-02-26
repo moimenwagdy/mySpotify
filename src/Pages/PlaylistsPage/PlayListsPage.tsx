@@ -45,7 +45,6 @@ export const action: ActionFunction<playlistItem | errorContent> = async ({
   }
   const resolved = await response.json();
   console.log(resolved);
-  form.set("playlistName", "");
-  form.set("playlistDes", "");
+
   return resolved;
 };

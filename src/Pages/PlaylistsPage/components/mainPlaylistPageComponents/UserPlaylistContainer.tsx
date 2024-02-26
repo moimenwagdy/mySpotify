@@ -10,6 +10,9 @@ import {
   useAppSelector,
 } from "../../../../stateRoot/reduxHooks";
 import { exitAction } from "../../../../stateRoot/exitSlice";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import playlistPages from "../../../../stateRoot/playlistPages";
 
 const UserPlaylistContainer = () => {
   const data = useLoaderData() as playlistItem;
@@ -24,12 +27,17 @@ const UserPlaylistContainer = () => {
       return;
     } else dispatch(exitAction.newPlaylisToggler());
   }
+  useEffect(() => {
+    data && dispatch(playlistPages.actions.setUserPlaylists(data));
+  }, [data, dispatch]);
   return (
     <main className="bg-dark p-4 mt-2 rounded-md">
-      <aside className="w-[98%] p-2  rounded-md bg-darkGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch">
+      <aside className="w-[98%] p-2  rounded-md  bg-darkGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch">
         <section className="w-4/5 lg:w-2/4 flex flex-col">
-          <div
-            className={`bg-simiDark/60 h-full w-full mx-auto  p-1 flex flex-col rounded-md ${
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`bg-simiDark/60  h-full w-full mx-auto  p-1 flex flex-col rounded-md ${
               noItems
                 ? "justify-center items-center "
                 : "justify-start items-center gap-y-1"
@@ -40,7 +48,7 @@ const UserPlaylistContainer = () => {
                 return (
                   <div
                     key={item.id}
-                    className=" px-2 flex w-full bg-lightGreen rounded gap-x-2 gap-y-1 lg:gap-y-0 text-dark  flex-col lg:flex-row justify-around items-center">
+                    className=" p-1 flex w-full bg-lightGreen rounded gap-x-2 gap-y-1 lg:gap-y-0 text-dark  flex-col lg:flex-row justify-around items-center">
                     <p className="font-bold text-white  px-1 rounded">
                       {item.name}
                     </p>
@@ -59,12 +67,8 @@ const UserPlaylistContainer = () => {
                         className="text-xs text-white px-2 rounded hover:text-lightGreen bg-dark">
                         Show
                       </button>
-                      <button className="text-xs text-white px-2 rounded hover:text-lightGreen bg-dark">
-                        delete
-                      </button>
                     </span>
-
-                    <p className="text-xs text-center w-fit px-1 rounded text-lightGreen bg-dark ">
+                    <p className="text-xs text-center w-fit p-1 rounded text-lightGreen bg-dark ">
                       {item.description}
                     </p>
                   </div>
@@ -84,7 +88,7 @@ const UserPlaylistContainer = () => {
                 {noItems ? "Create One" : "Add Playlist"}
               </button>
             )}
-          </div>
+          </motion.div>
         </section>
         <section className="w-full lg:w-2/4 h-full">
           <UsersNewPLManage />

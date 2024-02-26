@@ -10,7 +10,7 @@ const initial: playlistData = {
       offset: 0,
       next: "",
       previous: "",
-      total: "",
+      total: 0,
     },
   },
 };

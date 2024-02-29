@@ -1,9 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router";
 import UsersNewPLManage from "./UsersNewPLManage";
 import { playlistItem } from "../../types/Types";
-// import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { faFlag } from "@fortawesome/free-regular-svg-icons";
 import {
   useAppDispatch,
@@ -13,6 +11,7 @@ import { exitAction } from "../../../../stateRoot/exitSlice";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import playlistPages from "../../../../stateRoot/playlistPages";
+import ShowPlaylistButton from "./ShowPlaylistButton";
 
 const UserPlaylistContainer = () => {
   const data = useLoaderData() as playlistItem;
@@ -30,14 +29,24 @@ const UserPlaylistContainer = () => {
   useEffect(() => {
     data && dispatch(playlistPages.actions.setUserPlaylists(data));
   }, [data, dispatch]);
+
+  function showUserPlaylist(total: number, id: string) {
+    localStorage.removeItem("offset");
+    localStorage.removeItem("limit");
+    if (total === 0) {
+      window.alert("empty playlist");
+    } else {
+      navigate(`/playlists/playlistdetails?pListId=${id}`);
+    }
+  }
   return (
     <main className="bg-dark p-4 mt-2 rounded-md">
-      <aside className="w-[98%] p-2  rounded-md  bg-darkGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch">
+      <section className="w-[98%] p-2  rounded-md  bg-darkGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch">
         <section className="w-4/5 lg:w-2/4 flex flex-col">
           <motion.div
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`bg-simiDark/60  h-full w-full mx-auto  p-1 flex flex-col rounded-md ${
+            className={`bg-simiDark/60  h-full w-full mx-auto gap-y-2  p-1 flex flex-col rounded-md ${
               noItems
                 ? "justify-center items-center "
                 : "justify-start items-center gap-y-1"
@@ -46,32 +55,26 @@ const UserPlaylistContainer = () => {
             {!noItems ? (
               data.items.map((item) => {
                 return (
-                  <div
+                  <motion.div
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
                     key={item.id}
-                    className=" p-1 flex w-full bg-lightGreen rounded gap-x-2 gap-y-1 lg:gap-y-0 text-dark  flex-col lg:flex-row justify-around items-center">
-                    <p className="font-bold text-white  px-1 rounded">
+                    className={`p-1 flex w-full justify-start bg-transparent outline outline-1 outline-lightGreen rounded gap-x-2 gap-y-1 lg:gap-y-0 text-dark  flex-col lg:flex-row items-center`}>
+                    <p className="font-bold text-white w-1/3 text-center  px-1 rounded">
                       {item.name}
                     </p>
-                    <span className="flex flex-row gap-x-2">
-                      <button
-                        onClick={() => {
-                          if (item.tracks.total === 0) {
-                            window.alert("Empty Playlist");
-                          } else {
-                            navigate(
-                              `/playlists/playlistdetails?pListId=${item.id}`
-                            );
-                          }
-                        }}
-                        // to={`/playlists/playlistdetails?pListId=${item.id}`}
-                        className="text-xs text-white px-2 rounded hover:text-lightGreen bg-dark">
-                        Show
-                      </button>
-                    </span>
-                    <p className="text-xs text-center w-fit p-1 rounded text-lightGreen bg-dark ">
+                    <ShowPlaylistButton
+                      id={item.id}
+                      total={item.tracks.total}
+                      showUserPlaylist={showUserPlaylist}
+                    />
+                    <p
+                      className={`text-xs text-center ${
+                        item.description === "" ? "w-0 p-0" : "w-1/3 p-1"
+                      } rounded text-lightGreen bg-dark`}>
                       {item.description}
                     </p>
-                  </div>
+                  </motion.div>
                 );
               })
             ) : (
@@ -93,7 +96,7 @@ const UserPlaylistContainer = () => {
         <section className="w-full lg:w-2/4 h-full">
           <UsersNewPLManage />
         </section>
-      </aside>
+      </section>
     </main>
   );
 };

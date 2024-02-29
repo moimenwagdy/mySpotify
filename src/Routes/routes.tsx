@@ -5,7 +5,7 @@ import { loader as authLoader } from "../Pages/HomePage";
 import { action as logOutAction } from "../Pages/LogoutPage";
 import MainLayout from "../Pages/MainLayout";
 import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage";
-import Albums from "../Pages/Albums";
+import Albums from "../Pages/AlbumsPage/AlbumsPage";
 import Search from "../Pages/Search";
 import PlayListsPage, {
   action as CreatePlayListAction,
@@ -13,9 +13,9 @@ import PlayListsPage, {
 import ErrorFallback from "../components/ErrorFallback";
 import { loader } from "../Pages/PlaylistsPage/components/category'sPlaylistsComponents/PlaylistItems";
 import CategoryPlaylistsContainerPage from "../Pages/PlaylistsPage/CategoryPlaylistsContainerPage";
-import PlaylistDetailsPage, {
+import PlaylistDetails_TracksItemsPage, {
   loader as playlistDetailsLoader,
-} from "../Pages/PlaylistsPage/PlaylistDetailsPage";
+} from "../Pages/PlaylistsPage/PlaylistDetails_TracksItemsPage";
 import { loader as playlistLengthCheck } from "../Pages/PlaylistsPage/components/mainPlaylistPageComponents/UsersNewPLManage";
 
 // import { current } from "@reduxjs/toolkit";
@@ -37,7 +37,7 @@ const route = createBrowserRouter([
         element: <CategoriesPage />,
         children: [],
       },
-      { path: "albums", element: <Albums /> },
+      { path: "albums/:albumID?", element: <Albums /> },
       { path: "search", element: <Search /> },
       {
         path: "playlists",
@@ -66,7 +66,7 @@ const route = createBrowserRouter([
               { index: true, element: <CategoryPlaylistsContainerPage /> },
               {
                 path: "playlistdetails",
-                element: <PlaylistDetailsPage />,
+                element: <PlaylistDetails_TracksItemsPage />,
                 loader: playlistDetailsLoader,
               },
             ],

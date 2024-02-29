@@ -1,5 +1,8 @@
 import { playlisTracksActions } from "../../../../stateRoot/playlistTracksSlice";
-import { useAppDispatch, useAppSelector } from "../../../../stateRoot/reduxHooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../stateRoot/reduxHooks";
 import { tracks } from "../../types/Types";
 
 const PlaylistTracksNavigationButtons: React.FC<{

@@ -7,9 +7,7 @@ const Button: React.FC<{
   return (
     <button
       onClick={onClick}
-      className={` ${
-        mainButton ? "px-7 py-3" : ""
-      }  rounded-md ${className}`}>
+      className={` ${mainButton ? "px-7 py-3" : ""}  rounded-md ${className}`}>
       {title}
     </button>
   );

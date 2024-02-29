@@ -10,7 +10,6 @@ const PlaylistItem: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
-
   const offset = searchParams.get("offset");
   const limit = searchParams.get("limit");
   useEffect(() => {

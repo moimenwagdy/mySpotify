@@ -1,3 +1,5 @@
+import { AlbumItem, artisItem } from "../../AlbumsPage/Types/Types";
+
 export interface playlistItem {
   items: playlistContent[];
   limit: number;
@@ -14,7 +16,8 @@ export interface playlistContent {
   images: { url: string }[];
   name: string;
   owner: { display_name: string };
-  tracks: { href: string; total: number };
+  tracks: tracks;
+  uri: string;
 }
 
 export default interface playlistData {
@@ -24,8 +27,8 @@ export default interface playlistData {
   };
 }
 export interface track {
-  album: string;
-  artists: { name: string }[];
+  album: AlbumItem;
+  artists: artisItem[];
   duration_ms: number;
   href: string;
   id: string;

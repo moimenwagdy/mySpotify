@@ -4,6 +4,7 @@ import {
   LoaderFunctionArgs,
   defer,
   useLoaderData,
+  useNavigate,
 } from "react-router";
 import { myToken } from "../../utllties/tokenAndDurationControl";
 import { Suspense, useEffect } from "react";
@@ -22,7 +23,8 @@ import PlaylistTracksNavigationButtons from "./components/playlistDetailsAndTrac
 import PlaylistTracksImagedetails from "./components/playlistDetailsAndTracksComponents/PlaylistTracksImagedetails";
 import { exitAction } from "../../stateRoot/exitSlice";
 
-const PlaylistDetailsPage = () => {
+const PlaylistDetails_TracksItemsPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { playlistDetails }: playlistDetails =
     useLoaderData() as playlistDetails;
@@ -43,21 +45,41 @@ const PlaylistDetailsPage = () => {
     isLoading,
     isFetched,
   }: UseQueryResult<tracks, errorContent> = useQuery({
-    queryKey: [offset],
+    queryKey: ["plTracks", offset],
     queryFn: () => getTracks(playlisID!, offset),
     enabled: queryClient.getQueryData([offset]) !== offset,
   });
+  useEffect(() => {
+    if (isFetched && tracksData?.total === 0) {
+      const time = setTimeout(() => {
+        navigate("/playlists");
+      }, 1000);
 
+      return () => {
+        clearTimeout(time);
+      };
+    }
+  });
   let content = (
     <>
       {isFetched &&
         !isError &&
         tracksData &&
         tracksData!.items.map((track) => {
+          console.log(track);
           return <TrackItem track={track.track} key={track.track.id} />;
         })}
     </>
   );
+
+  if (isFetched && tracksData?.total === 0) {
+    content = (
+      <div className="mt-10 text-white text-center">
+        <p>playlist Cleared </p>
+        returning to your playlists in 3 seconds
+      </div>
+    );
+  }
 
   if (isLoading) {
     content = <LoadingIndecator />;
@@ -90,7 +112,7 @@ const PlaylistDetailsPage = () => {
                 />
                 <div
                   key={offset}
-                  className={`bg-dark/90 p-2 rounded-xl me-2 mt-6 w-full md:w-3/5  flex flex-col  justify-start  items-center mx-auto`}>
+                  className={`bg-dark/90 p-2 rounded-xl me-2 mt-6 w-full md:w-4/6  flex flex-col  justify-start  items-center mx-auto`}>
                   <PlaylistTracksNavigationButtons
                     isLoading={isLoading}
                     data={data.tracks}
@@ -107,7 +129,7 @@ const PlaylistDetailsPage = () => {
   );
 };
 
-export default PlaylistDetailsPage;
+export default PlaylistDetails_TracksItemsPage;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const getDetails: LoaderFunction = async ({

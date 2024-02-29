@@ -34,7 +34,11 @@ const PlaylistTracksImagedetails: React.FC<{
           mySpotify
         </p>
         <Link
-          to={`/playlists/${PreviousUrlId}?limit=${limit}&offset=${offset}`}
+          to={
+            limit && offset
+              ? `/playlists/${PreviousUrlId}?limit=${limit}&offset=${offset}`
+              : `/playLists`
+          }
           className="text-lightGreen bg-simiDark hover:bg-dark transition duration-500  text-sm px-3 py-1 rounded-md">
           Back To Playlist
         </Link>

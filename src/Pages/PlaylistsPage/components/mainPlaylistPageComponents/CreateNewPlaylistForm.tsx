@@ -49,6 +49,7 @@ const CreateNewPlaylistForm: React.FC = () => {
                   name="public"
                   value="true"
                   className="checked:text-red-600 mx-1"
+                  defaultChecked
                 />
                 public
               </label>

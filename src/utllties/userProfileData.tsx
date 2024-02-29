@@ -10,6 +10,5 @@ export const userProfileData = async (token: string) => {
     throw json({ message: "faild to get profile data" });
   }
   const data = await response.json();
-  console.log(data);
   return data;
 };

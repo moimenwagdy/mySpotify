@@ -7,7 +7,6 @@ const HomeTapsNavbar = () => {
         <TapItem main title="Home" destination="Home" />
         <TapItem main title="Categories" destination="categories" />
         <TapItem main title="PlayLists" destination="playLists" />
-        <TapItem main title="Albums" destination="albums" />
         <TapItem main title="Search" destination="search" />
       </ul>
     </nav>

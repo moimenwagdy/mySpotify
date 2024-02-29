@@ -1,20 +1,25 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import HearderLink from "./HearderLink";
 
 const Header = () => {
   return (
     <header className=" flex flex-col z-[1]">
       <section className="flex h-24">
-        <section className=" flex justify-center shadow-xl shadow-black/20 w-3/5 rounded-br-[100%] h-24 absolute top-0 -left-3 bg-dark">
-          <div className=" flex flex-col justify-center items-start w-2/4">
-            <h1 className="font-rubik font-[500] text-2xl tracking-wider  text-lightGreen text-start  ">
+        <section className=" flex justify-start shadow-xl shadow-black/20 w-3/5 rounded-br-[100%] h-24 absolute top-0 -left-3 bg-dark">
+          <div className="ms-10 flex flex-col justify-center items-start w-2/4">
+            {/* <h1 className="font-rubik font-[500] text-2xl tracking-wider text-lightGreen text-start  ">
               My Spotify
-            </h1>
+            </h1> */}
+            <img
+              src="../../images/Spotify_Logo_CMYK_Green.png"
+              width="180"
+              alt="Logo"
+            />
           </div>
         </section>
         <motion.section
           variants={{
-            init: { x: 0, y: -80 },
+            init: { x: 0, y: -85 },
             now: { x: 100 },
           }}
           initial="now"
@@ -22,18 +27,12 @@ const Header = () => {
           transition={{ duration: 1, type: "spring", stiffness: 80 }}
           whileHover={{ y: 0, width: "105%", borderRadius: 0, right: -2 }}
           className=" flex text-end shadow-xl shadow-black/20  z-10 w-3/5 h-[190px]  absolute -top-4 -right-4  rounded-bl-[100%] bg-darkGreen">
-          <div className="flex flex-col w-full me-7 gap-y-12 mt-7">
+          <div className="flex flex-col w-full me-10 gap-y-12 mt-7">
             <div className="self-end">
-              <div className="w-12 flex flex-col text-center">
-                <Link to="/home" className="text-base text-white">
-                  Home
-                </Link>
-                <Link to="/playlists" className="text-base text-white">
-                  playlists
-                </Link>
-                <Link to="/categories" className="text-base text-white">
-                  categories
-                </Link>
+              <div className="w-12 flex flex-col justify-end items-end">
+                <HearderLink to="/home" title="Home" />
+                <HearderLink to="/playlists" title="Playlists" />
+                <HearderLink to="/categories" title="Categories" />
               </div>
             </div>
             <h2 className=" text-xl text-white ">Menu</h2>

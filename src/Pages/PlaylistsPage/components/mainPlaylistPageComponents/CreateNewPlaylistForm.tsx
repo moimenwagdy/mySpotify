@@ -1,5 +1,5 @@
 import { Form, useActionData, useNavigation } from "react-router-dom";
-import InputField from "./InputField";
+import InputField from "../../../../components/InputField";
 import {
   useAppDispatch,
   useAppSelector,
@@ -69,11 +69,13 @@ const CreateNewPlaylistForm: React.FC = () => {
             <div className="flex justify-center items-center gap-x-2">
               <Button
                 title={submitting ? "Submitting" : "Save"}
-                className="w-full py-1 outline outline-1 hover:text-lightGreen outline-darkGreen  mx-auto"></Button>
+                className="w-full py-1 outline outline-1 hover:text-lightGreen outline-darkGreen  mx-auto"
+              />
               <Button
                 title="Close"
                 onClick={closeForm}
-                className="w-full py-1 outline outline-1  outline-light  mx-auto"></Button>
+                className="w-full py-1 outline outline-1  outline-light  mx-auto"
+              />
             </div>
           </motion.div>
         </Form>

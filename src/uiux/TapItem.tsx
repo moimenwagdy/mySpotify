@@ -1,10 +1,19 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { playlisTracksActions } from "../stateRoot/playlistTracksSlice";
+import { useAppDispatch } from "../stateRoot/reduxHooks";
 
 const TapItem: React.FC<{
   destination: string;
   title: string;
   main?: boolean;
 }> = ({ title, destination, main }) => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (title === "PlayLists") {
+      dispatch(playlisTracksActions.reset());
+    }
+  });
   return (
     <li className="py-2 text-center text-sm ">
       <NavLink

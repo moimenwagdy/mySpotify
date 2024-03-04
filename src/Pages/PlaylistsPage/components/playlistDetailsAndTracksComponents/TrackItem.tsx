@@ -8,17 +8,20 @@ import SelectPlForm from "./SelectPlForm";
 import AddToPlButton from "./AddToPlButton";
 import IframeTrack from "./IframeTrack";
 import DeleteTrackFromCurrentPl from "./DeleteTrackFromCurrentPl";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const TrackItem: React.FC<{ track: track }> = ({ track }) => {
   const [show, setShow] = useState<boolean>(false);
   const [playlistID, setPlayistId] = useState("");
   const [playlistUpdated, setplaylistUpdated] = useState<boolean>(false);
+  const [params] = useSearchParams();
+  const albumTracksPAge = params.get("albumId");
   /////
-  const { data: userPlaylists }: UseQueryResult<playlistItem> = useQuery({
-    queryKey: ["userPlaylists"],
-    queryFn: getUserPlaylists,
-  });
+  const { data: userPlaylists, isFetched }: UseQueryResult<playlistItem> =
+    useQuery({
+      queryKey: ["userPlaylists"],
+      queryFn: getUserPlaylists,
+    });
   ////
 
   const { mutate } = useMutation({
@@ -33,6 +36,8 @@ const TrackItem: React.FC<{ track: track }> = ({ track }) => {
     setShow((prv) => !prv);
   }
   /////
+  const playlistExist = userPlaylists?.total !== 0;
+  ////
   function addTrackToPlaylist() {
     if (playlistID !== "") {
       setTimeout(() => {
@@ -63,33 +68,39 @@ const TrackItem: React.FC<{ track: track }> = ({ track }) => {
       layout>
       <IframeTrack id={track.id} />
       <AnimatePresence>
-        <nav className="flex flex-col sm:flex-row justify-start text-sm items-center w-full gap-x-3">
-          <p className="text-lightGreen  rounded-md my-1 bg-dark min-w-44 text-center px-2">
+        <nav className=" gap-y-1 md:gap-y-0 h-24 sm:h-10 md:h-20 lg:h-10 flex flex-col sm:flex-row justify-start text-sm items-center w-full gap-x-3">
+          <p className="text-lightGreen  rounded-md my-1 bg-dark min-w-44 sm:min-w-32 lg:min-w-44 text-center px-2">
             {track.artists[0].name}
           </p>
-          <Link
-            className="bg-dark text-lightGreen px-2"
-            to={`/albums/${track.artists[0].id}`}>
-            Albums
-          </Link>
-
-          <div className="flex text-lightGreen gap-x-1">
-            <AddToPlButton
-              show={show}
-              playlistUpdated={playlistUpdated}
-              userPlaylistListHandle={userPlaylistListHandle}
-            />
-            <SelectPlForm
-              CloseAddTrackToPlaylist={CloseAddTrackToPlaylist}
-              addTrackToPlaylist={addTrackToPlaylist}
-              show={show}
-              changeHandler={changeHandler}
-              userPlaylists={userPlaylists!}
-            />
-            {!offsetExist && !limitExist && !show && (
-              <DeleteTrackFromCurrentPl uri={track.uri} />
+          <>
+            <span className="text-lightGreen bg-dark px-2 rounded ">
+              <Link className="" to={`/artists/${track.artists[0].id}`}>
+                Albums
+              </Link>
+            </span>
+          </>
+          <AnimatePresence>
+            {!show && (
+              <AddToPlButton
+                playlistUpdated={playlistUpdated}
+                userPlaylistListHandle={userPlaylistListHandle}
+              />
             )}
-          </div>
+          </AnimatePresence>
+          <AnimatePresence>
+            {show && playlistExist && (
+              <SelectPlForm
+                CloseAddTrackToPlaylist={CloseAddTrackToPlaylist}
+                addTrackToPlaylist={addTrackToPlaylist}
+                changeHandler={changeHandler}
+                userPlaylists={userPlaylists!}
+                isFetched={isFetched}
+              />
+            )}
+          </AnimatePresence>
+          {!offsetExist && !limitExist && !show && !albumTracksPAge && (
+            <DeleteTrackFromCurrentPl uri={track.uri} />
+          )}
         </nav>
       </AnimatePresence>
     </motion.div>

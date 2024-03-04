@@ -1,10 +1,14 @@
 import { Outlet } from "react-router";
 import { useEffect } from "react";
-import { expirationDuration, myToken } from "../utllties/tokenAndDurationControl";
+import {
+  expirationDuration,
+  myToken,
+} from "../utllties/tokenAndDurationControl";
 import { useSubmit } from "react-router-dom";
 import Header from "../components/Header";
 import NavUserDataContainer from "../uiux/NavUserDataContainer";
 import HomeTapsNavbar from "../components/HomeTapsNavbar";
+import Footer from "../components/Footer";
 
 const MainLayout = () => {
   const submit = useSubmit();
@@ -32,6 +36,7 @@ const MainLayout = () => {
       <main>
         <Outlet />
       </main>
+      <Footer />
     </>
   );
 };

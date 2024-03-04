@@ -91,7 +91,7 @@ const CategoriesPage = () => {
     content = <ErrorFallback ErrorData={error} />;
   }
 
-  return <>{content}</>;
+  return <main className="">{content}</main>;
 };
 
 export default CategoriesPage;

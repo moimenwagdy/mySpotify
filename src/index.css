@@ -20,3 +20,13 @@
     font-family: "Rubik";
   }
 }
+
+/* body {
+  min-height: 210vh;
+} */
+
+@layer components {
+  .checkbox-label:has(input:checked) {
+    @apply outline text-lightGreen outline-1 outline-lightGreen hover:outline-darkGreen/60;
+  }
+}

@@ -19,20 +19,23 @@ const Header = () => {
         </section>
         <motion.section
           variants={{
-            init: { x: 0, y: -85 },
+            init: { x: 0, y: -145 },
             now: { x: 100 },
           }}
           initial="now"
           animate="init"
           transition={{ duration: 1, type: "spring", stiffness: 80 }}
           whileHover={{ y: 0, width: "105%", borderRadius: 0, right: -2 }}
-          className=" flex text-end shadow-xl shadow-black/20  z-10 w-3/5 h-[190px]  absolute -top-4 -right-4  rounded-bl-[100%] bg-darkGreen">
-          <div className="flex flex-col w-full me-10 gap-y-12 mt-7">
+          className=" flex text-end shadow-xl shadow-black/20  z-10 w-3/5 h-[255px]  absolute -top-4 -right-4  rounded-bl-[100%] bg-darkGreen hover:bg-darkGreen/50 transition-colors duration-700 ">
+          <div className="flex flex-col w-full me-10 gap-y-9 mt-2 pt-3">
             <div className="self-end">
               <div className="w-12 flex flex-col justify-end items-end">
                 <HearderLink to="/home" title="Home" />
                 <HearderLink to="/playlists" title="Playlists" />
                 <HearderLink to="/categories" title="Categories" />
+                <HearderLink to="/search" title="Search" />
+                <HearderLink to="/about" title="About" />
+                <HearderLink to="/contact" title="Contact" />
               </div>
             </div>
             <h2 className=" text-xl text-white ">Menu</h2>

@@ -59,7 +59,9 @@ const PlaylistDetails_TracksItemsPage = () => {
         clearTimeout(time);
       };
     }
+    localStorage.setItem("pListId", playlisID!);
   });
+  isFetched && console.log(tracksData);
   let content = (
     <>
       {isFetched &&
@@ -75,7 +77,7 @@ const PlaylistDetails_TracksItemsPage = () => {
   if (isFetched && tracksData?.total === 0) {
     content = (
       <div className="mt-10 text-white text-center">
-        <p>playlist Cleared </p>
+        <p> playlist Cleared </p>
         returning to your playlists in 3 seconds
       </div>
     );
@@ -103,8 +105,8 @@ const PlaylistDetails_TracksItemsPage = () => {
               }}
               initial="hidden"
               animate="visible"
-              className="w-full min-h-[800px] bg-lightGreen rounded-xl mt-2">
-              <div className="w-[96%] mx-auto flex flex-col md:flex-row gap-x-2 ">
+              className="w-full pb-6 bg-lightGreen rounded-xl mt-2">
+              <div className="mx-auto flex flex-col md:flex-row gap-x-2 ">
                 <PlaylistTracksImagedetails
                   total={data.tracks.total}
                   image={data.images && data.images[0].url}
@@ -112,7 +114,7 @@ const PlaylistDetails_TracksItemsPage = () => {
                 />
                 <div
                   key={offset}
-                  className={`bg-dark/90 p-2 rounded-xl me-2 mt-6 w-full md:w-4/6  flex flex-col  justify-start  items-center mx-auto`}>
+                  className={`bg-dark/90 p-4 rounded-xl  mt-6 w-full md:w-4/6  flex flex-col  justify-start  items-center mx-auto`}>
                   <PlaylistTracksNavigationButtons
                     isLoading={isLoading}
                     data={data.tracks}

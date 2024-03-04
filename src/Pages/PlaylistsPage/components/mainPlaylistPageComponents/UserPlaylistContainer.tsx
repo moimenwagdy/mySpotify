@@ -40,8 +40,8 @@ const UserPlaylistContainer = () => {
     }
   }
   return (
-    <main className="bg-dark p-4 mt-2 rounded-md">
-      <section className="w-[98%] p-2  rounded-md  bg-darkGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch">
+    <main className="bg-dark p-4 mt-2 rounded-md lg:min-h-[50vh]">
+      <section className="w-[98%] p-2  rounded-md  bg-darkGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch ">
         <section className="w-4/5 lg:w-2/4 flex flex-col">
           <motion.div
             initial={{ opacity: 0, y: -30 }}

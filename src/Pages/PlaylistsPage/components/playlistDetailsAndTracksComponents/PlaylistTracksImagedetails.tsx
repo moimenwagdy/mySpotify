@@ -1,4 +1,6 @@
 import { Link, useParams } from "react-router-dom";
+import { playlisTracksActions } from "../../../../stateRoot/playlistTracksSlice";
+import { useAppDispatch } from "../../../../stateRoot/reduxHooks";
 
 const PlaylistTracksImagedetails: React.FC<{
   total: number;
@@ -9,6 +11,7 @@ const PlaylistTracksImagedetails: React.FC<{
   const PreviousUrlId = params.id;
   const offset = localStorage.getItem("offset");
   const limit = localStorage.getItem("limit");
+  const dispatch = useAppDispatch();
   return (
     <>
       <div className="relative md:bg-secondryColor/50  rounded-xl mt-4 md:mt-6 w-2/5 mx-auto lg:mx-0 flex flex-col gap-y-2 justify-evenly items-center md:min-h-[800px]">
@@ -34,6 +37,9 @@ const PlaylistTracksImagedetails: React.FC<{
           mySpotify
         </p>
         <Link
+          onClick={() => {
+            dispatch(playlisTracksActions.reset());
+          }}
           to={
             limit && offset
               ? `/playlists/${PreviousUrlId}?limit=${limit}&offset=${offset}`

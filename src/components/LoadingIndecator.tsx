@@ -3,7 +3,7 @@ import { faPause, faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 const LoadingIndecator: React.FC = () => {
   return (
-    <div className="flex mx-auto w-1/4 justify-center relativ mt-24 ">
+    <div className="flex mx-auto w-1/4 justify-center relative mt-24 min-h-[120vh]">
       <motion.button
         className="text-lightGreen text-5xl absolute"
         variants={{

@@ -53,8 +53,8 @@ const CategoryPlaylistsContainerPage = () => {
                   variants={{
                     hidden: { opacity: 0 },
                   }}
-                  exit="hidden">
-                  <section className="mx-auto flex w-[90%] flex-col justify-center items-center">
+                  exit="hidden" >
+                  <section className="mx-auto flex w-[90%] flex-col justify-center items-center ">
                     <h1 className=" text-lg font-[600] texy-center mt-2">
                       {playlistMessage}
                     </h1>

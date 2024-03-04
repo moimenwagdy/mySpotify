@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router";
 import Button from "../../../uiux/Button";
 import { artistsAlbums } from "../Types/Types";
 
 const AlbumItem: React.FC<{ data: artistsAlbums }> = ({ data }) => {
+  const navigate = useNavigate();
+  function toAlbumTracks(albumId: string, imgURL: string) {
+    navigate(`/album?albumId=${albumId}&IMG=${imgURL}`);
+  }
   return (
     <>
       {data?.items.map((item) => {
@@ -11,9 +16,10 @@ const AlbumItem: React.FC<{ data: artistsAlbums }> = ({ data }) => {
           month: "short",
           year: "numeric",
         });
-
         return (
-          <section key={item.id} className=" bg-lightGreen my-2  p-2  rounded-md relative">
+          <section
+            key={item.id}
+            className=" bg-lightGreen my-2  p-2  rounded-md relative">
             <span className=" z-10 flex flex-col bg-dark/90  px-4 py-2 rounded-md justify-between ">
               <span className="flex items-center justify-around w-full">
                 <div className="flex flex-col gap-y-1 w-3/4">
@@ -33,11 +39,12 @@ const AlbumItem: React.FC<{ data: artistsAlbums }> = ({ data }) => {
                 </div>
               </span>
               <Button
+                onClick={() => toAlbumTracks(item.id, item.images[0].url)}
                 title="Tracks"
                 className=" z-10 outline outline-1 outline-lightGreen w-20 md:w-28 py-1 mx-auto "
               />
             </span>
-            <p className="absolute select-none left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] text-[100px] md:text-[220px] opacity-[.05] z-[0] text-lightGreen/50">
+            <p className="absolute select-none left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] text-[100px] md:text-[120px] opacity-[.05] z-[0] text-lightGreen/50">
               Spotify
             </p>
           </section>

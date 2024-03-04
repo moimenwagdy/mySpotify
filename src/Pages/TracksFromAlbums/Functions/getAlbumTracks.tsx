@@ -1,17 +1,14 @@
 import { myToken } from "../../../utllties/tokenAndDurationControl";
 
-export const getAlbums = async function (id: string, offset: number) {
+export const getAlbumTracks = async function (id: string) {
   const tokens = myToken();
   const userToken = tokens?.userToken;
   const nonUserToken = tokens?.nonUserToken;
-  const response = await fetch(
-    `https://api.spotify.com/v1/artists/${id}/albums?limit=15&offset=${offset}`,
-    {
-      headers: {
-        Authorization: "Bearer " + (userToken ? userToken : nonUserToken),
-      },
-    }
-  );
+  const response = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks`, {
+    headers: {
+      Authorization: "Bearer " + (userToken ? userToken : nonUserToken),
+    },
+  });
   if (response.status === 404) {
     throw { message: "Page Not Found", status: 404 };
   }

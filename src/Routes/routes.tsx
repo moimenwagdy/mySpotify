@@ -6,7 +6,7 @@ import { action as logOutAction } from "../Pages/LogoutPage";
 import MainLayout from "../Pages/MainLayout";
 import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage";
 import Albums from "../Pages/AlbumsPage/AlbumsPage";
-import Search from "../Pages/Search";
+import SearchPage from "../Pages/SearchPage/SearchPage";
 import PlayListsPage, {
   action as CreatePlayListAction,
 } from "../Pages/PlaylistsPage/PlayListsPage";
@@ -17,6 +17,8 @@ import PlaylistDetails_TracksItemsPage, {
   loader as playlistDetailsLoader,
 } from "../Pages/PlaylistsPage/PlaylistDetails_TracksItemsPage";
 import { loader as playlistLengthCheck } from "../Pages/PlaylistsPage/components/mainPlaylistPageComponents/UsersNewPLManage";
+import AlbumTracksPage from "../Pages/TracksFromAlbums/AlbumTracksPage";
+import { searchAction } from "../Pages/SearchPage/components/SearchForm";
 
 // import { current } from "@reduxjs/toolkit";
 const route = createBrowserRouter([
@@ -37,8 +39,18 @@ const route = createBrowserRouter([
         element: <CategoriesPage />,
         children: [],
       },
-      { path: "albums/:albumID?", element: <Albums /> },
-      { path: "search", element: <Search /> },
+      {
+        path: "artists",
+        children: [
+          { index: true },
+          {
+            path: ":artistsID?",
+            element: <Albums />,
+          },
+        ],
+      },
+      { path: "album", element: <AlbumTracksPage /> },
+      { path: "search", element: <SearchPage />, action: searchAction },
       {
         path: "playlists",
         children: [

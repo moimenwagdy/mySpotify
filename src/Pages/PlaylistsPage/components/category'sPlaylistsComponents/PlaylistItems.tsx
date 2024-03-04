@@ -6,7 +6,10 @@ import {
   useRouteLoaderData,
 } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "../../../../stateRoot/reduxHooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../stateRoot/reduxHooks";
 import PlaylistItem from "./PlaylistItem";
 import { StyledPlaylistPagenationButtons } from "./StyledPlaylistPagenationButtons";
 import { myToken } from "../../../../utllties/tokenAndDurationControl";
@@ -19,6 +22,7 @@ const PlaylistItems: React.FC = () => {
   const data = useAppSelector(
     (state) => state.playlistResponseSlice.data.playlist
   );
+  data && console.log(data);
   const defaultOffset = useAppSelector(
     (state) => state.playlistPages.offsetDefaultVal
   );
@@ -65,9 +69,11 @@ const PlaylistItems: React.FC = () => {
             initial={{ y: -50 }}
             animate={{ y: 0 }}
             className={` mx-auto w-[90%] z-10 rounded-md bg-darkGreen  ${
-              data && data.items.length < 8 ? "min-h-[175px]" : "min-h-[560px]"
+              data && data.items.length < 8 ? "min-h-[180px]" : "min-h-[560px]"
             }   flex gap-3 py-3 px-2 flex-wrap justify-center `}>
-            <PlaylistItem />
+            {data.items.map((playlist, i) => {
+              return <PlaylistItem data={playlist} i={i} />;
+            })}
           </motion.ul>
         </motion.section>
       )}

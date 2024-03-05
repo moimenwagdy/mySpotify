@@ -68,7 +68,6 @@ const PlaylistDetails_TracksItemsPage = () => {
         !isError &&
         tracksData &&
         tracksData!.items.map((track) => {
-          console.log(track);
           return <TrackItem track={track.track} key={track.track.id} />;
         })}
     </>

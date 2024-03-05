@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { playlisTracksActions } from "../../../../stateRoot/playlistTracksSlice";
 import { useAppDispatch } from "../../../../stateRoot/reduxHooks";
 
@@ -7,8 +7,9 @@ const PlaylistTracksImagedetails: React.FC<{
   followers: number;
   image: string;
 }> = ({ total, followers, image }) => {
-  const params = useParams();
-  const PreviousUrlId = params.id;
+  const ere = history.state;
+  console.log(ere);
+  const PreviousUrlId = localStorage.getItem("playlistIdFromCategories");
   const offset = localStorage.getItem("offset");
   const limit = localStorage.getItem("limit");
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ const PlaylistTracksImagedetails: React.FC<{
             dispatch(playlisTracksActions.reset());
           }}
           to={
-            limit && offset
+            limit !== null && offset !== null
               ? `/playlists/${PreviousUrlId}?limit=${limit}&offset=${offset}`
               : `/playLists`
           }

@@ -22,7 +22,6 @@ const PlaylistItems: React.FC = () => {
   const data = useAppSelector(
     (state) => state.playlistResponseSlice.data.playlist
   );
-  data && console.log(data);
   const defaultOffset = useAppSelector(
     (state) => state.playlistPages.offsetDefaultVal
   );
@@ -72,7 +71,7 @@ const PlaylistItems: React.FC = () => {
               data && data.items.length < 8 ? "min-h-[180px]" : "min-h-[560px]"
             }   flex gap-3 py-3 px-2 flex-wrap justify-center `}>
             {data.items.map((playlist, i) => {
-              return <PlaylistItem data={playlist} i={i} />;
+              return <PlaylistItem key={playlist.id} data={playlist} i={i} />;
             })}
           </motion.ul>
         </motion.section>

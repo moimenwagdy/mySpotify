@@ -32,7 +32,6 @@ const CategoryPlaylistsContainerPage = () => {
     dispatch(playlisTracksActions.reset());
   }, [offset, dispatch]);
   const exit = useAppSelector((state) => state.exitSlice.exiting);
-  console.log(exit);
   const playlistData = useAppSelector(
     (state) => state.playlistResponseSlice.data.playlist
   );

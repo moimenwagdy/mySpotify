@@ -33,7 +33,7 @@ const AlbumItem: React.FC<{ data: artistsAlbums }> = ({ data }) => {
                     src={item.images[1].url}
                     className="rounded-xl min-w-[100px]  "
                   />
-                  <p className="absolute -bottom-5 text-white/50 text-xs">
+                  <p className="absolute -bottom-5 min-w-[100px] text-white/50 text-xs">
                     Spotify copyRight
                   </p>
                 </div>

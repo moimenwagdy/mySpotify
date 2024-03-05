@@ -11,6 +11,7 @@ import CheckBoxItems from "./CheckBoxItems";
 const SearchForm = () => {
   const submit = useNavigation();
   const submitting = submit.state === "submitting";
+ 
   return (
     <section className="flex justify-center w-full py-10 rounded px-2 sm:px-0">
       <Form method="post" className="w-full sm:w-3/4 md:w-1/2">
@@ -25,7 +26,8 @@ const SearchForm = () => {
               autoFocus={true}
             />
             <div className="flex justify-center">
-              <button className=" outline  outline-1 bg-lightGreen text-dark ring-inset ring-offset-2 ring-1 ring-darkGreen hover:bg-lightGreen transition-all delay-150 ring-offset-dark font-[400] outline-lightGreen/50 hover:outline-lightGreen text-sm min-w-24 py-1 rounded ">
+              <button
+                className=" outline  outline-1 bg-lightGreen text-dark ring-inset ring-offset-2 ring-1 ring-darkGreen hover:bg-lightGreen transition-all delay-150 ring-offset-dark font-[400] outline-lightGreen/50 hover:outline-lightGreen text-sm min-w-24 py-1 rounded ">
                 {submitting ? "Searching ... " : "Search"}
               </button>
             </div>

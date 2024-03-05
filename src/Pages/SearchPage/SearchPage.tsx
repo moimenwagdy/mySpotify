@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import SearchTrackResult from "./components/SearchTrackResult";
 import SerachPlaylisrResult from "./components/SerachPlaylisrResult";
 import AlbumItem from "../AlbumsPage/components/AlbumItem";
+import SectionResultCard from "./components/SectionResultCard";
+import SearchArtistsResults from "./components/SearchArtistsResults";
 
 const SearchPage = () => {
   const data = useActionData() as fullSearchResult;
@@ -14,7 +16,7 @@ const SearchPage = () => {
     data?.error && console.log(data.error);
   }, [data]);
   return (
-    <main>
+    <main className="flex flex-col gap-y-10">
       <motion.div
         variants={{
           hidden: { opacity: 0, y: -30 },
@@ -27,25 +29,55 @@ const SearchPage = () => {
           Hit Search And Find The Missing Piece Of Your Day !
         </h1>
         <SearchForm />
+        {data?.error && (
+          <p className="sm:w-1/2 mx-auto text-center text-red-600">
+            {data.error.message}{" "}
+            <span className="text-xs">
+              {" "}
+              "Write Your Seach Target And Select Type"
+            </span>
+          </p>
+        )}
       </motion.div>
-      {data?.error && (
-        <p className="w-1/2 mx-auto text-center text-red-600">
-          {data.error.message}{" "}
-          <span className="text-xs">
-            {" "}
-            "Write Your Seach Target And Select Type"
-          </span>
-        </p>
+      {(data?.albums || data?.artists || data?.artists || data?.tracks) && (
+        <h1 className="text-center">Results</h1>
       )}
-      {data?.tracks &&
-        data.tracks.items.map((track) => {
-          return <SearchTrackResult track={track} />;
-        })}
-      {data?.playlists &&
-        data.playlists.items.map((playlist, i) => {
-          return <SerachPlaylisrResult data={playlist} i={i} />;
-        })}
-      {data?.albums && <AlbumItem data={data.albums} />}
+      <section className="flex flex-col gap-y-10">
+        {data?.tracks && (
+          <SectionResultCard>
+            <h1 className="font-bold">Tracks</h1>
+            {data?.tracks &&
+              data.tracks.items.map((track) => {
+                return <SearchTrackResult track={track} />;
+              })}
+          </SectionResultCard>
+        )}
+        {data?.albums && (
+          <SectionResultCard>
+            {" "}
+            <h1 className="font-bold">Albums</h1>
+            {data?.albums && <AlbumItem data={data.albums} />}
+          </SectionResultCard>
+        )}
+        {data?.playlists && (
+          <SectionResultCard>
+            <h1 className="self-start font-bold">Playlists</h1>
+            {data?.playlists &&
+              data.playlists.items.map((playlist, i) => {
+                return <SerachPlaylisrResult data={playlist} i={i} />;
+              })}
+          </SectionResultCard>
+        )}
+        {data?.artists && (
+          <SectionResultCard>
+            <h1 className="self-start font-bold">Artist</h1>
+            {data?.artists &&
+              data.artists.items.map((artist) => {
+                return <SearchArtistsResults artist={artist} />;
+              })}
+          </SectionResultCard>
+        )}
+      </section>
     </main>
   );
 };

@@ -8,15 +8,19 @@ import SelectPlForm from "./SelectPlForm";
 import AddToPlButton from "./AddToPlButton";
 import IframeTrack from "./IframeTrack";
 import DeleteTrackFromCurrentPl from "./DeleteTrackFromCurrentPl";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const TrackItem: React.FC<{ track: track }> = ({ track }) => {
   const [show, setShow] = useState<boolean>(false);
   const [playlistID, setPlayistId] = useState("");
   const [playlistUpdated, setplaylistUpdated] = useState<boolean>(false);
-  const [params] = useSearchParams();
-  const albumTracksPAge = params.get("albumId");
+  const offsetExist = localStorage.getItem("offset");
+  const limitExist = localStorage.getItem("limit");
+  const location = useLocation();
   /////
+  const searchPage = location.pathname.includes("search");
+  const albumTracksPAge = location.pathname.includes("album");
+  ////
   const { data: userPlaylists, isFetched }: UseQueryResult<playlistItem> =
     useQuery({
       queryKey: ["userPlaylists"],
@@ -29,8 +33,6 @@ const TrackItem: React.FC<{ track: track }> = ({ track }) => {
     mutationFn: () => setTrackToPlaylist(playlistID!, track.uri),
   });
   /////
-  const offsetExist = localStorage.getItem("offset");
-  const limitExist = localStorage.getItem("offset");
   ////
   function userPlaylistListHandle() {
     setShow((prv) => !prv);
@@ -98,9 +100,11 @@ const TrackItem: React.FC<{ track: track }> = ({ track }) => {
               />
             )}
           </AnimatePresence>
-          {!offsetExist && !limitExist && !show && !albumTracksPAge && (
-            <DeleteTrackFromCurrentPl uri={track.uri} />
-          )}
+          {!offsetExist &&
+            !limitExist &&
+            !show &&
+            !albumTracksPAge &&
+            !searchPage && <DeleteTrackFromCurrentPl uri={track.uri} />}
         </nav>
       </AnimatePresence>
     </motion.div>

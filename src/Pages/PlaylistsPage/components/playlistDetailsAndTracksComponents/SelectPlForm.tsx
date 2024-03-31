@@ -22,9 +22,11 @@ const SelectPlForm: React.FC<{
   const newArr = userPlaylists && [
     ...userPlaylists.items.filter((e) => e.id !== pListId),
   ];
-  const playlistExist = userPlaylists?.total !== 0;
 
   console.log(newArr);
+
+  console.log(newArr);
+  console.log(userPlaylists);
 
   return (
     <>
@@ -51,8 +53,7 @@ const SelectPlForm: React.FC<{
             selected>
             Select Playlist
           </option>
-          {playlistExist &&
-            newArr &&
+          {newArr &&
             newArr.map((item: playlistContent) => {
               return (
                 <option

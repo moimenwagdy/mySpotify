@@ -14,7 +14,7 @@ const ArtistItem: React.FC<{ artist: SearchArtistitem }> = ({ artist }) => {
       onClick={openArtistAlbums}
       className="cursor-pointer group hover:outline-lightGreen px-4 py-4 flex justify-start items-center rounded-xl full gap-x-20 outline outline-2 outline-darkGreen">
       <div className="flex flex-col justify-center items-center">
-        <img src={artist.images[2].url} className="min-w-full rounded-lg" />
+        <img src={artist?.images[2]?.url} className="min-w-full rounded-lg" />
         <p className="text-white/50 flex justify-center items-center gap-x-2">
           <span className="text-xs text-lightGreen">
             <FontAwesomeIcon icon={faHeart} />

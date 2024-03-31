@@ -34,7 +34,7 @@ const UsersNewPLManage = () => {
       className={`text-center bg-dark/90 rounded-md p-3 ${
         noItems ? "p-3" : ""
       } flex flex-col gap-y-3`}>
-      {!noItems && (
+      {!noItems ? (
         <>
           <p className="text-sm text-white p-2">
             Add Tracks And Enjoy Your Own Playlists
@@ -46,16 +46,13 @@ const UsersNewPLManage = () => {
           </Link>
           {!isShown && (
             <Button
-              onClick={() => {
-                !isShown ? dispatch(exitAction.newPlaylisToggler()) : "";
-              }}
+              onClick={!isShown && toggleNewPlaylistForm}
               title="create new playlist"
               className="hover:text-lightGreen py-1 px-3 outline outline-1 rounded outline-lightGreen  mx-auto"
             />
           )}
         </>
-      )}
-      {noItems && (
+      ) : (
         <>
           <h2 className="text-sm">You don't have any playlists until now</h2>
           <span className="flex flex-col">
@@ -80,16 +77,29 @@ export const loader: LoaderFunction = async () => {
   const tokens = myToken();
   const userToken = tokens?.userToken;
   const nonUserToken = tokens?.nonUserToken;
-  const response = await fetch("https://api.spotify.com/v1/me/playlists", {
-    headers: {
-      Authorization: "Bearer " + (userToken ? userToken : nonUserToken),
-    },
-  });
+  async function getPlaylists() {
+    const response = await fetch("https://api.spotify.com/v1/me/playlists", {
+      headers: {
+        Authorization: "Bearer " + (userToken ? userToken : nonUserToken),
+      },
+    });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw error.error;
+    if (!response.ok) {
+      const error = await response.json();
+      // if (nonUserToken) {
+      //   error.error = {
+      //     message: "Login To Get Access Permission To Your Private Data",
+      //   };
+      // }
+      throw error.error;
+    }
+    const myData = await response.json();
+    return myData;
   }
-  const myData = await response.json();
-  return myData;
+  if (userToken) {
+    return getPlaylists();
+  }
+  if (nonUserToken) {
+    return null;
+  }
 };

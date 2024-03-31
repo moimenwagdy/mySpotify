@@ -48,7 +48,7 @@ const SearchPage = () => {
             <h1 className="font-bold">Tracks</h1>
             {data?.tracks &&
               data.tracks.items.map((track) => {
-                return <SearchTrackResult track={track} />;
+                return <SearchTrackResult key={track.id} track={track} />;
               })}
           </SectionResultCard>
         )}
@@ -64,7 +64,13 @@ const SearchPage = () => {
             <h1 className="self-start font-bold">Playlists</h1>
             {data?.playlists &&
               data.playlists.items.map((playlist, i) => {
-                return <SerachPlaylisrResult data={playlist} i={i} />;
+                return (
+                  <SerachPlaylisrResult
+                    key={playlist.id}
+                    data={playlist}
+                    i={i}
+                  />
+                );
               })}
           </SectionResultCard>
         )}
@@ -73,7 +79,7 @@ const SearchPage = () => {
             <h1 className="self-start font-bold">Artist</h1>
             {data?.artists &&
               data.artists.items.map((artist) => {
-                return <SearchArtistsResults artist={artist} />;
+                return <SearchArtistsResults key={artist.id} artist={artist} />;
               })}
           </SectionResultCard>
         )}

@@ -3,17 +3,18 @@ import { myToken } from "../../../utllties/tokenAndDurationControl";
 export const getUserPlaylists = async () => {
   const tokens = myToken();
   const userToken = tokens?.userToken;
-  const nonUserToken = tokens?.nonUserToken;
-  const response = await fetch("https://api.spotify.com/v1/me/playlists", {
-    headers: {
-      Authorization: "Bearer " + (userToken ? userToken : nonUserToken),
-    },
-  });
+  if (userToken) {
+    const response = await fetch("https://api.spotify.com/v1/me/playlists", {
+      headers: {
+        Authorization: "Bearer " + userToken,
+      },
+    });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw error.error;
+    if (!response.ok) {
+      const error = await response.json();
+      throw error.error;
+    }
+    const myData = await response.json();
+    return myData;
   }
-  const myData = await response.json();
-  return myData;
 };

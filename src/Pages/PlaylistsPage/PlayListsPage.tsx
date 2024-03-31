@@ -1,10 +1,31 @@
-import { ActionFunction, ActionFunctionArgs } from "react-router-dom";
+import {
+  ActionFunction,
+  ActionFunctionArgs,
+  useActionData,
+} from "react-router-dom";
 import { myToken } from "../../utllties/tokenAndDurationControl";
 import UserPlaylistContainer from "./components/mainPlaylistPageComponents/UserPlaylistContainer";
 import { playlistItem } from "./types/Types";
 import { errorContent } from "../../utllties/interfaces";
+import createNewPlaylist from "./functions/createNewPlaylist";
+import { useAppDispatch } from "../../stateRoot/reduxHooks";
+import { nonUserPlaylistsActions } from "../../stateRoot/nonUserPLaylists";
+import { useEffect } from "react";
 
 const PlayListsPage = () => {
+  const data = useActionData();
+  const dispatch = useAppDispatch();
+  const tokens = myToken();
+  const nonUserToken = tokens?.nonUserToken;
+  useEffect(() => {
+    if (nonUserToken && data) {
+      
+      dispatch(nonUserPlaylistsActions.addNewNonUserPlaylist(data));
+    }
+  }, [data, dispatch, nonUserToken]);
+
+  console.log(data);
+
   return <UserPlaylistContainer />;
 };
 
@@ -16,9 +37,9 @@ export const action: ActionFunction<playlistItem | errorContent> = async ({
 }: ActionFunctionArgs) => {
   const userID = localStorage.getItem("userID");
   const form = await request.formData();
-  const playlistName = form.get("playlistName");
-  const playlistDes = form.get("playlistDes");
-  const publicValue = form.get("public");
+  const playlistName = form.get("playlistName")!;
+  const playlistDes = form.get("playlistDes")!;
+  const publicValue = form.get("public")!;
   const tokens = myToken();
   const userToken = tokens?.userToken;
   const nonUserToken = tokens?.nonUserToken;
@@ -27,24 +48,12 @@ export const action: ActionFunction<playlistItem | errorContent> = async ({
     description: playlistDes,
     public: publicValue,
   };
-  console.log(publicValue);
-  const response = await fetch(
-    `https://api.spotify.com/v1/users/${userID}/playlists`,
-    {
-      method: request.method,
-      body: JSON.stringify(playlistBody),
-      headers: {
-        Authorization: "Bearer " + (userToken ? userToken : nonUserToken),
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  if (!response.ok) {
-    const error = await response.json();
-    return error.error;
+  if (userToken) {
+    return createNewPlaylist(userID!, request.method, playlistBody);
   }
-  const resolved = await response.json();
-  console.log(resolved);
-
-  return resolved;
+  if (nonUserToken) {
+    const randomID = Math.random().toString(36).slice(2, 10);
+    const newPlaylistBody = { ...playlistBody, id: randomID, uris: [] };
+    return newPlaylistBody;
+  }
 };

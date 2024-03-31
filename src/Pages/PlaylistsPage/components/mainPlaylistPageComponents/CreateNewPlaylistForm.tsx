@@ -18,6 +18,11 @@ const CreateNewPlaylistForm: React.FC = () => {
   function closeForm() {
     dispatch(exitAction.newPlaylisToggler());
   }
+  function submitForm() {
+    setTimeout(() => {
+      dispatch(exitAction.newPlaylisToggler());
+    }, 200);
+  }
   const { state } = useNavigation();
   const submitting = state === "submitting";
   const idle = state === "idle";
@@ -68,6 +73,7 @@ const CreateNewPlaylistForm: React.FC = () => {
             </>
             <div className="flex justify-center items-center gap-x-2">
               <Button
+                onClick={submitForm}
                 title={submitting ? "Submitting" : "Save"}
                 className="w-full py-1 outline outline-1 hover:text-lightGreen outline-darkGreen  mx-auto"
               />

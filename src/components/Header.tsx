@@ -7,9 +7,6 @@ const Header = () => {
       <section className="flex h-24">
         <section className=" flex justify-start shadow-xl shadow-black/20 w-3/5 rounded-br-[100%] h-24 absolute top-0 -left-3 bg-dark">
           <div className="ms-10 flex flex-col justify-center items-start w-2/4">
-            {/* <h1 className="font-rubik font-[500] text-2xl tracking-wider text-lightGreen text-start  ">
-              My Spotify
-            </h1> */}
             <img
               src="../../images/Spotify_Logo_CMYK_Green.png"
               width="180"
@@ -30,7 +27,7 @@ const Header = () => {
           <div className="flex flex-col w-full me-10 gap-y-9 mt-2 pt-3">
             <div className="self-end">
               <div className="w-12 flex flex-col justify-end items-end">
-                <HearderLink to="/home" title="Home" />
+                <HearderLink to="/" title="Home" />
                 <HearderLink to="/playlists" title="Playlists" />
                 <HearderLink to="/categories" title="Categories" />
                 <HearderLink to="/search" title="Search" />

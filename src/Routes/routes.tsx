@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import WelcomePage from "../Pages/WelcomePage";
-import HomePage from "../Pages/HomePage";
-import { loader as authLoader } from "../Pages/HomePage";
+// import WelcomePage from "../Pages/WelcomePage";
+import LandingPage from "../Pages/LandingPage";
+import { loader as authLoader } from "../Pages/LandingPage";
 import { action as logOutAction } from "../Pages/LogoutPage";
 import MainLayout from "../Pages/MainLayout";
 import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage";
@@ -19,9 +19,15 @@ import PlaylistDetails_TracksItemsPage, {
 import { loader as playlistLengthCheck } from "../Pages/PlaylistsPage/components/mainPlaylistPageComponents/UsersNewPLManage";
 import AlbumTracksPage from "../Pages/TracksFromAlbums/AlbumTracksPage";
 import { searchAction } from "../Pages/SearchPage/components/SearchForm";
+import {
+  LocalPlaylists,
+  localPlaylistsLoader,
+} from "../Pages/PlaylistsPage/LocalPlaylists";
 
 // import { current } from "@reduxjs/toolkit";
 const route = createBrowserRouter([
+  // { index: true, element: <WelcomePage /> },
+
   {
     path: "/",
     element: <MainLayout />,
@@ -29,11 +35,10 @@ const route = createBrowserRouter([
     errorElement: <ErrorFallback />,
     children: [
       {
-        path: "home",
-        element: <HomePage />,
+        index: true,
+        element: <LandingPage />,
         loader: authLoader,
       },
-
       {
         path: "categories",
         element: <CategoriesPage />,
@@ -80,6 +85,11 @@ const route = createBrowserRouter([
                 element: <PlaylistDetails_TracksItemsPage />,
                 loader: playlistDetailsLoader,
               },
+              {
+                path: "localPlaylists",
+                element: <LocalPlaylists />,
+                loader: localPlaylistsLoader,
+              },
             ],
           },
         ],
@@ -87,7 +97,6 @@ const route = createBrowserRouter([
     ],
   },
 
-  { index: true, element: <WelcomePage /> },
   { path: "logout", action: logOutAction },
 ]);
 

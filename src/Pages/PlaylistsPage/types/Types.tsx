@@ -18,9 +18,8 @@ export interface playlistContent {
   owner: { display_name: string };
   tracks: tracks;
   uri: string;
+  uris: string[];
 }
-
-
 
 export default interface playlistData {
   data: {
@@ -38,6 +37,10 @@ export interface track {
   popularity: number;
   type: string;
   uri: string;
+}
+
+export interface localTracks {
+  tracks: track[];
 }
 
 export interface tracksItems {

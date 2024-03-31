@@ -10,11 +10,13 @@ import {
   clientID,
   redirectURI,
   responseType,
+  scope,
 } from "../utllties/apiCredintials";
 userProfileData;
 const NavUserDataContainer = () => {
   const token = myToken();
   const userToken = token?.userToken;
+  const nonUserToken = token?.nonUserToken;
   const { data, isFetched } = useQuery({
     queryKey: ["userProfileData"],
     queryFn: () => userProfileData(userToken!),
@@ -29,7 +31,7 @@ const NavUserDataContainer = () => {
   }
   return (
     <section className="flex flex-col items-end -mb-4 mt-4  self-end me-2">
-      {data ? (
+      {data && userToken && !nonUserToken ? (
         <>
           <UserDataCard
             followers={data && data.followers.total}
@@ -49,15 +51,15 @@ const NavUserDataContainer = () => {
         </>
       ) : (
         <UserDataCard
-          followers={12}
+          followers={0}
           userName="Welcome user"
-          userEmail="login to get you playlists"
+          userEmail="login to manage your data"
           imgSRC="../../images/spoIcon.png">
           <motion.a
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="self-end -mt-2 "
-            href={`${endPoint}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=${responseType}`}>
+            href={`${endPoint}?client_id=${clientID}&redirect_uri=${redirectURI}&scope=${scope}&response_type=${responseType}`}>
             <Button
               className="bg-dark text-[10px] px-1 text-lightGreen"
               title="Log In"></Button>

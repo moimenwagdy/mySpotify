@@ -1,31 +1,49 @@
 import { useLoaderData, useNavigate } from "react-router";
 import UsersNewPLManage from "./UsersNewPLManage";
-import { playlistItem } from "../../types/Types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFlag } from "@fortawesome/free-regular-svg-icons";
+import { playlistContent, playlistItem } from "../../types/Types";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../stateRoot/reduxHooks";
 import { exitAction } from "../../../../stateRoot/exitSlice";
-import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import playlistPages from "../../../../stateRoot/playlistPages";
 import ShowPlaylistButton from "./ShowPlaylistButton";
+import UserPlaylistShortcutItem from "./UserPlaylistShortcutItem";
+import { myToken } from "../../../../utllties/tokenAndDurationControl";
+import { nonUserPlaylistsActions } from "../../../../stateRoot/nonUserPLaylists";
+import { EmptyPlaylists } from "./EmptyPlaylists";
 
 const UserPlaylistContainer = () => {
-  const data = useLoaderData() as playlistItem;
+  const token = myToken();
+  const userToken = token?.userToken;
+  const nonUserToken = token?.nonUserToken;
+  const data = useLoaderData() as playlistItem | null;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [handleDel, setHandleDel] = useState<boolean>(false);
   const formIsOpened = useAppSelector(
     (state) => state.exitSlice.showNewPlaylistForm
   );
-  const noItems = data.items.length === 0;
+  const nonUserPlayLists = useAppSelector(
+    (state) => state.nonUserPlaylists.items
+  );
+  const noItems = data?.items.length === 0;
+  const nullData = data === null;
+  const nonUserPlaylistsExist = nonUserPlayLists.length !== 0;
   function openNewPlaylistForm() {
     if (formIsOpened) {
       return;
     } else dispatch(exitAction.newPlaylisToggler());
   }
+
+  function deletePlaylist(id: string) {
+    setHandleDel(true);
+    dispatch(nonUserPlaylistsActions.deletePlaylist({ id: id }));
+    setHandleDel(false);
+  }
+
   useEffect(() => {
     data && dispatch(playlistPages.actions.setUserPlaylists(data));
   }, [data, dispatch]);
@@ -33,11 +51,69 @@ const UserPlaylistContainer = () => {
   function showUserPlaylist(total: number, id: string) {
     localStorage.removeItem("offset");
     localStorage.removeItem("limit");
-    if (total === 0) {
+    const tragetPlaylist = nonUserPlayLists.find((item) => {
+      return item.id === id;
+    });
+    if (total === 0 || tragetPlaylist?.uris.length === 0) {
       window.alert("empty playlist");
     } else {
-      navigate(`/playlists/playlistdetails?pListId=${id}`);
+      userToken && navigate(`/playlists/playlistdetails?pListId=${id}`);
+      nonUserToken &&
+        navigate(
+          `/playlists/localPlaylists?pListId=${tragetPlaylist?.uris.join(
+            "%2C"
+          )}`
+        );
     }
+  }
+  let content = <p>Playlists</p>;
+  if (userToken) {
+    content = (
+      <>
+        {!noItems && !nullData ? (
+          data?.items?.map((item) => {
+            return (
+              <UserPlaylistShortcutItem key={item.id} item={item}>
+                <ShowPlaylistButton
+                  id={item.id}
+                  total={item.tracks.total}
+                  showUserPlaylist={showUserPlaylist}
+                />
+              </UserPlaylistShortcutItem>
+            );
+          })
+        ) : (
+          <EmptyPlaylists />
+        )}
+      </>
+    );
+  }
+  if (nonUserToken) {
+    content = (
+      <AnimatePresence>
+        {nonUserPlaylistsExist && !handleDel ? (
+          nonUserPlayLists.map((item: playlistContent) => {
+            return (
+              <UserPlaylistShortcutItem key={item.id} item={item}>
+                <ShowPlaylistButton
+                  id={item?.id}
+                  showUserPlaylist={showUserPlaylist}
+                />
+                {nonUserToken && (
+                  <button
+                    className="text-xs text-white"
+                    onClick={() => deletePlaylist(item.id)}>
+                    Delete
+                  </button>
+                )}
+              </UserPlaylistShortcutItem>
+            );
+          })
+        ) : (
+          <EmptyPlaylists />
+        )}
+      </AnimatePresence>
+    );
   }
   return (
     <main className="bg-dark p-4 mt-2 rounded-md lg:min-h-[50vh]">
@@ -52,40 +128,7 @@ const UserPlaylistContainer = () => {
                 : "justify-start items-center gap-y-1"
             }`}>
             <p className="text-white tracking-wide font-bold">User Playlists</p>
-            {!noItems ? (
-              data.items.map((item) => {
-                return (
-                  <motion.div
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    key={item.id}
-                    className={`p-1 flex w-full justify-start bg-transparent outline outline-1 outline-lightGreen rounded gap-x-2 gap-y-1 lg:gap-y-0 text-dark  flex-col lg:flex-row items-center`}>
-                    <p className="font-bold text-white w-1/3 text-center  px-1 rounded">
-                      {item.name}
-                    </p>
-                    <ShowPlaylistButton
-                      id={item.id}
-                      total={item.tracks.total}
-                      showUserPlaylist={showUserPlaylist}
-                    />
-                    <p
-                      className={`text-xs text-center ${
-                        item.description === "" ? "w-0 p-0" : "w-1/3 p-1"
-                      } rounded text-lightGreen bg-dark`}>
-                      {item.description}
-                    </p>
-                  </motion.div>
-                );
-              })
-            ) : (
-              <div className="text-center gap-y-2 flex flex-col">
-                <p>Empty</p>
-                <FontAwesomeIcon
-                  className="text-4xl text-lightGreen"
-                  icon={faFlag}
-                />
-              </div>
-            )}
+            {content}
             {!formIsOpened && (
               <button onClick={openNewPlaylistForm}>
                 {noItems ? "Create One" : "Add Playlist"}

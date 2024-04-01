@@ -1,5 +1,5 @@
 import { LoaderFunction, useLoaderData } from "react-router";
-import Home from "../components/Home";
+import Home from "./HomePage/Home";
 // import { LoaderRequest } from "../utllties/interfaces";
 import getNonUserToken from "../utllties/getNonUserToken";
 import setFutureDate from "../utllties/tokenAndDurationControl";

@@ -8,7 +8,8 @@ const Header = () => {
         <section className=" flex justify-start shadow-xl shadow-black/20 w-3/5 rounded-br-[100%] h-24 absolute top-0 -left-3 bg-dark">
           <div className="ms-10 flex flex-col justify-center items-start w-2/4">
             <img
-              src="../../images/Spotify_Logo_CMYK_Green.png"
+            className="rounded-xl h-118"
+              src="../../images/7e866d676183487ba365eaccb614cbaf.png"
               width="180"
               alt="Logo"
             />
@@ -35,7 +36,7 @@ const Header = () => {
                 <HearderLink to="/contact" title="Contact" />
               </div>
             </div>
-            <h2 className=" text-xl text-white ">Menu</h2>
+            <h2 className=" text-xl text-white font-[900]">Menu</h2>
           </div>
         </motion.section>
       </section>

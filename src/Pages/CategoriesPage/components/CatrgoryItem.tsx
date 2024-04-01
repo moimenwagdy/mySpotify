@@ -31,7 +31,9 @@ const CatrgoryItem: React.FC<CategoriesResponse> = ({ categories }) => {
                   src={item.icons[0].url}
                   alt="CatImg"
                   className="w-80 sm:w-72 md:w-64 rounded-md cursor-pointer"></img>
-                <p className="absolute bottom-6 rounded-md cursor-pointer">{item.name}</p>
+                <p className="absolute bottom-6 font-extrabold text-lg rounded-md cursor-pointer">
+                  {item.name}
+                </p>
               </motion.li>
             </Link>
           );

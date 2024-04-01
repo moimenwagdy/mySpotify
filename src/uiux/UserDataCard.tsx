@@ -16,11 +16,11 @@ const UserDataCard: React.FC<{
             className="w-10 h-10 rounded-full"
             alt="user-Image"></img>
         </div>
-        <div className="">
-          <p className="text-sm">{userName}</p>
-          <p className="text-xs">{userEmail}</p>
+        <div className="-space-y-1">
+          <p className="font-[700]">{userName}</p>
+          <p className="text-sm">{userEmail}</p>
           <div className="flex gap-x-2">
-            <p className="text-xs ">followers {followers}</p>
+            <p className="text-sm ">followers {followers}</p>
             {children}
           </div>
         </div>

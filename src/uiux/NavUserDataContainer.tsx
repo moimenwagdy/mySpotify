@@ -12,23 +12,29 @@ import {
   responseType,
   scope,
 } from "../utllties/apiCredintials";
+import { useEffect } from "react";
 userProfileData;
 const NavUserDataContainer = () => {
   const token = myToken();
   const userToken = token?.userToken;
   const nonUserToken = token?.nonUserToken;
-  const { data, isFetched } = useQuery({
+  const submit = useSubmit();
+  const { data, isFetched, isError, error } = useQuery({
     queryKey: ["userProfileData"],
     queryFn: () => userProfileData(userToken!),
     enabled: userToken != undefined,
   });
-  const submit = useSubmit();
   function logOut() {
     submit(null, { method: "POST", action: "logout" });
   }
   if (isFetched) {
     localStorage.setItem("userID", data && data.id);
   }
+  useEffect(() => {
+    if (isError) {
+      console.log(error);
+    }
+  });
   return (
     <section className="flex flex-col items-end -mb-4 mt-6  self-end me-2">
       {data && userToken && !nonUserToken ? (

@@ -108,7 +108,7 @@ const Header = () => {
               animate="anim"
               transition={{ duration: 0.5, type: "spring" }}
               src={`${
-                currentmodeisDark ? "../../images/8C.png" : "../../images/8.png"
+                currentmodeisDark ? "../images/8C.png" : "../images/8.png"
               }  `}
               className="absolute  right-0 bottom-0 me-6 sm:me-8 mb-3 w-16 "></motion.img>
           </motion.section>

@@ -12,6 +12,7 @@ export const getUserPlaylists = async () => {
 
     if (!response.ok) {
       const error = await response.json();
+      console.log(error);
       throw error.error;
     }
     const myData = await response.json();

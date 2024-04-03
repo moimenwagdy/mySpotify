@@ -18,5 +18,5 @@ export const action: ActionFunction = async function () {
   localStorage.removeItem("tokenExpire");
   localStorage.removeItem("pListId");
   localStorage.removeItem("playlistIdFromCategories");
-  return redirect("/");
+  return redirect("../");
 };

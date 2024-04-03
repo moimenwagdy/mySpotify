@@ -26,8 +26,6 @@ import {
 
 // import { current } from "@reduxjs/toolkit";
 const route = createBrowserRouter([
-  // { index: true, element: <WelcomePage /> },
-
   {
     path: "/",
     element: <MainLayout />,
@@ -40,9 +38,8 @@ const route = createBrowserRouter([
         loader: authLoader,
       },
       {
-        path: "categories",
-        element: <CategoriesPage />,
-        children: [],
+        path: "/categories",
+        children: [{ index: true, element: <CategoriesPage /> }],
       },
       {
         path: "artists",
@@ -97,7 +94,7 @@ const route = createBrowserRouter([
     ],
   },
 
-  { path: "logout", action: logOutAction },
+  { path: "/logout", action: logOutAction },
 ]);
 
 export default route;

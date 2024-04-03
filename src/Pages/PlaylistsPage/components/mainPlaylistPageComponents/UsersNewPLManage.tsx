@@ -91,6 +91,7 @@ export const loader: LoaderFunction = async () => {
       //     message: "Login To Get Access Permission To Your Private Data",
       //   };
       // }
+      console.log(error);
       throw error.error;
     }
     const myData = await response.json();

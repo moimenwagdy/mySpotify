@@ -15,7 +15,7 @@ const DialogModal: React.FC<{
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
       ref={modalRef}
-      className="w-80 h-60 bg-transparent z-[40] backdrop:bg-white/50">
+      className="w-96 h-80 bg-transparent z-[40] backdrop:bg-white/50 dark:backdrop:bg-dark/50 ">
       {children}
     </motion.dialog>
   );

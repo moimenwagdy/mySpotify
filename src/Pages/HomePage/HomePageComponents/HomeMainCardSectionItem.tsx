@@ -22,7 +22,8 @@ const HomeMainCardSectionItem: React.FC<{
         opacity: smallScreen ? 0 : 1,
         rotate: -10,
       }}
-      className="min-h-[330px] sm:min-h-[340px] md:min-h-[385px] lg:min-h-[520px]  cursor-pointer w-1/2 md:w-1/4 lg:w-1/5 overflow-hidden bg-white/50 rounded-xl h-[115%]    ">
+      whileHover={{ scale: 1.02 }}
+      className="min-h-[330px] sm:min-h-[340px] md:min-h-[385px] lg:min-h-[520px] w-1/2 md:w-1/4 lg:w-1/5 overflow-hidden bg-white/50 rounded-xl h-[115%]    ">
       <img
         className={` ${smallScreen ? "" : "scale-y-[.90]"} max-w-[100%] ${
           imgMargin ? "mt-6" : ""

@@ -60,7 +60,7 @@ const CategoriesPage = () => {
     content = <ErrorFallback ErrorData={error} />;
   }
 
-  return <main className="">{content}</main>;
+  return <main className="min-h-[50vh]">{content}</main>;
 };
 
 export default CategoriesPage;

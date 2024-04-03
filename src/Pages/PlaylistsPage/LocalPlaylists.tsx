@@ -13,8 +13,8 @@ export const LocalPlaylists = () => {
     }, 2000);
   }
   return (
-    <div className="bg-secondryColor p-10">
-      <div className="w-full md:w-[80%] bg-lightGreen/80 p-5 rounded-lg lg:w-[70%] mx-auto  min-h-screen">
+    <div className="dark:bg-dark/40 bg-secondryColor p-10">
+      <div className="w-full md:w-[80%] bg-lightGreen/80 dark:bg-darkerGreen p-5 rounded-lg lg:w-[70%] mx-auto  min-h-screen">
         {dataExist &&
           data &&
           data?.tracks?.map((item) => {

@@ -26,7 +26,11 @@ const Header = () => {
     setRederControl(false);
   }
   const ele = document.querySelector("html");
-  const currentmodeisDark = ele?.classList.contains("dark");
+  const modeFromLocalStorage = localStorage.get("mode");
+  let currentmodeisDark = ele?.classList.contains("dark");
+  if (modeFromLocalStorage === "dark") {
+    currentmodeisDark = true;
+  } else currentmodeisDark = false;
   return (
     <header className=" flex flex-col z-[1]">
       <section className="flex h-24">

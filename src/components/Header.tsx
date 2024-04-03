@@ -26,7 +26,7 @@ const Header = () => {
     setRederControl(false);
   }
   const ele = document.querySelector("html");
-  const modeFromLocalStorage = localStorage.get("mode");
+  const modeFromLocalStorage = localStorage.getItem("mode");
   let currentmodeisDark = ele?.classList.contains("dark");
   if (modeFromLocalStorage === "dark") {
     currentmodeisDark = true;

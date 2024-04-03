@@ -20,12 +20,12 @@ const TapItem: React.FC<{
         to={destination}
         className={({ isActive }) => {
           if (isActive && main) {
-            return "bg-lightGreen p-2 rounded-sm text-white";
+            return "bg-lightGreen dark:bg-darkerGreen p-2 rounded-sm text-white";
           }
           if (isActive && !main) {
             return "bg-secondryColor text-white p-2";
           }
-          return "p-2 text-dark rounded-sm text-sm hover:bg-secondryColor";
+          return "p-2 text-dark dark:text-light rounded-sm text-sm hover:bg-secondryColor hover:dark:bg-simiDark";
         }}>
         {title}
       </NavLink>

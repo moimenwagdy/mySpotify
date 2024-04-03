@@ -11,6 +11,9 @@ export default {
         light: "#d4ccc4",
         lightGreen: "#8bfa37",
         darkGreen: "#61b025",
+        darkerGreen: "#134611",
+        darkBasicBackground: "#252525",
+        offWhite:"#f4f9e9"
       },
       backgroundImage: {
         smImg: "url('../../images/sm.jpg')",

@@ -37,7 +37,6 @@ const AlbumItems = () => {
   function prevAlbums() {
     setAlbumsOffset((prv) => prv - 15);
   }
-
   function backToArtistPl() {
     navigate(`/playlists/playlistdetails?pListId=${pListId}`);
   }

@@ -10,7 +10,7 @@ const CheckboxInputItem: React.FC<{
     <>
       <motion.label
         transition={{ type: "spring" }}
-        className="checkbox-label w-full text-center  text-white/70 outline rounded outline-1 outline-darkGreen/70  hover:text-lightGreen/90  cursor-pointer "
+        className="checkbox-label w-full text-center text-dark dark:text-white/70 outline rounded outline-1  outline-white/70 hover:outline-white dark:outline-darkGreen/70  dark:hover:text-lightGreen/90 hover:text-darkerGreen cursor-pointer "
         htmlFor={id}>
         {name}
         <input

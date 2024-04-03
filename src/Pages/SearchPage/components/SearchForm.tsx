@@ -24,6 +24,7 @@ const SearchForm = () => {
               placeholder="Find Music "
               className="w-full h-12"
               autoFocus={true}
+              playlist={false}
             />
             <div className="flex justify-center">
               <button

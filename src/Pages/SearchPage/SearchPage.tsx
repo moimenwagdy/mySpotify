@@ -16,7 +16,7 @@ const SearchPage = () => {
     data?.error && console.log(data.error);
   }, [data]);
   return (
-    <main className="flex flex-col gap-y-10">
+    <main className="flex flex-col gap-y-10 bg-darkGreen dark:bg-transparent mt-10 dark:mt-2 ">
       <motion.div
         variants={{
           hidden: { opacity: 0, y: -30 },
@@ -24,8 +24,8 @@ const SearchPage = () => {
         }}
         initial="hidden"
         animate="visible"
-        className=" p-4 mt-10 rounded w-3/4 mx-auto bg-dark/50">
-        <h1 className="text-center text-white font-bold">
+        className=" p-4 mt-10 rounded w-3/4 mx-auto bg-light dark:bg-dark/50">
+        <h1 className="text-center text-dark dark:text-white font-bold">
           Hit Search And Find The Missing Piece Of Your Day !
         </h1>
         <SearchForm />

@@ -49,6 +49,7 @@ const CategoryPlaylistsContainerPage = () => {
               }
               return (
                 <motion.main
+                className="min-h-[50vh]"
                   variants={{
                     hidden: { opacity: 0 },
                   }}

@@ -30,7 +30,7 @@ const NavUserDataContainer = () => {
     localStorage.setItem("userID", data && data.id);
   }
   return (
-    <section className="flex flex-col items-end -mb-4 mt-4  self-end me-2">
+    <section className="flex flex-col items-end -mb-4 mt-6  self-end me-2">
       {data && userToken && !nonUserToken ? (
         <>
           <UserDataCard
@@ -53,7 +53,7 @@ const NavUserDataContainer = () => {
         <UserDataCard
           followers={0}
           userName="Welcome user"
-          userEmail="login to manage your data"
+          userEmail="login to get your data"
           imgSRC="../../images/spoIcon.png">
           <motion.a
             initial={{ opacity: 0 }}

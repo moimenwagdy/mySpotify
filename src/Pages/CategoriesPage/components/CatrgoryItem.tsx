@@ -26,7 +26,7 @@ const CatrgoryItem: React.FC<CategoriesResponse> = ({ categories }) => {
                   transition: { type: "spring", stiffness: 500 },
                 }}
                 exit={{ opacity: 0 }}
-                className="flex justify-center cursor-pointer relative">
+                className="flex justify-center cursor-pointer relative ">
                 <img
                   src={item.icons[0].url}
                   alt="CatImg"

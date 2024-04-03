@@ -101,7 +101,7 @@ const UserPlaylistContainer = () => {
                 />
                 {nonUserToken && (
                   <button
-                    className="text-xs text-white"
+                    className="text-xs text-dark dark:text-light dark:hover:text-lightGreen hover:text-darkerGreen"
                     onClick={() => deletePlaylist(item.id)}>
                     Delete
                   </button>
@@ -116,13 +116,13 @@ const UserPlaylistContainer = () => {
     );
   }
   return (
-    <main className="bg-dark p-4 mt-2 rounded-md lg:min-h-[50vh]">
-      <section className="w-[98%] p-2  rounded-md  bg-darkGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch ">
+    <main className="bg-offWhite/50 dark:bg-dark p-4 mt-8 rounded-md lg:min-h-[50vh]">
+      <section className="w-[98%] p-2  rounded-md  bg-darkGreen dark:bg-darkerGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch ">
         <section className="w-4/5 lg:w-2/4 flex flex-col">
           <motion.div
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`bg-simiDark/60  h-full w-full mx-auto gap-y-2  p-1 flex flex-col rounded-md ${
+            className={`relative bg-simiDark/60 pb-8  h-full w-full mx-auto gap-y-2  p-1 flex flex-col rounded-md ${
               noItems
                 ? "justify-center items-center "
                 : "justify-start items-center gap-y-1"
@@ -130,7 +130,9 @@ const UserPlaylistContainer = () => {
             <p className="text-white tracking-wide font-bold">User Playlists</p>
             {content}
             {!formIsOpened && (
-              <button onClick={openNewPlaylistForm}>
+              <button
+                className="absolute bottom-0"
+                onClick={openNewPlaylistForm}>
                 {noItems ? "Create One" : "Add Playlist"}
               </button>
             )}

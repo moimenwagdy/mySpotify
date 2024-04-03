@@ -17,8 +17,8 @@ const AlbumTracksContainer = () => {
   isFetched && console.log(data);
 
   return (
-    <main className="bg-lightGreen p-6 m-2 rounded-xl">
-      <section className="bg-light/50 rounded-xl py-6 flex flex-col-reverse justify-between items-center gap-y-4 lg:flex-row lg:justify-evenly lg:items-center ">
+    <main className="bg-lightGreen dark:bg-dark/70  p-6 m-2 rounded-xl">
+      <section className="bg-light/50 dark:bg-darkerGreen/50 rounded-xl py-6 flex flex-col-reverse justify-between items-center gap-y-4 lg:flex-row lg:justify-evenly lg:items-center ">
         <div className="w-3/4 lg:w-1/2">
           {isFetched &&
             data?.items.map((item) => {

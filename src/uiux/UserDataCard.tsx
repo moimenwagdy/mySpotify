@@ -8,7 +8,7 @@ const UserDataCard: React.FC<{
   children?: ReactNode;
 }> = ({ userName, imgSRC, followers, userEmail, children }) => {
   return (
-    <aside id="userData" className=" flex flex-col w-full  ">
+    <aside id="userData" className=" flex flex-col w-full text-dark dark:text-white  ">
       <div className="self-center w-full flex justify-cnter gap-x-3 ">
         <div className="flex justify-center items-center">
           <img
@@ -17,7 +17,7 @@ const UserDataCard: React.FC<{
             alt="user-Image"></img>
         </div>
         <div className="-space-y-1">
-          <p className="font-[700]">{userName}</p>
+          <p className="font-[700] ">{userName}</p>
           <p className="text-sm">{userEmail}</p>
           <div className="flex gap-x-2">
             <p className="text-sm ">followers {followers}</p>

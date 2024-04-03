@@ -9,7 +9,7 @@ const ShowPlaylistButton: React.FC<{
         onClick={() => {
           showUserPlaylist(total!, id);
         }}
-        className={` text-xs  text-white px-3 py-1 rounded hover:text-lightGreen bg-dark`}>
+        className={` text-xs  dark:text-light text-dark px-3 py-1 rounded hover:text-darkerGreen dark:hover:text-lightGreen bg-light dark:bg-dark`}>
         Show
       </button>
     </span>

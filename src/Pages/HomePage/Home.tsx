@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const scrollTimer = setTimeout(() => {
       window.scrollBy({
-        top: 200,
+        top: 175,
         behavior: "smooth",
       });
     }, 1000);
@@ -23,14 +23,14 @@ const Home: React.FC = () => {
       }}
       initial="hidden"
       animate="visible"
-      className="p-6 bg-simiDark mt-6 ">
+      className="p-6 bg-simiDark dark:bg-dark  mt-6 ">
       <motion.ul
         variants={{
           visible: {
             transition: { staggerChildren: 0.5 },
           },
         }}
-        className="w-[70%] sm:w-full rounded-xl h-auto  mx-auto gap-y-4 sm:gap-y-0 text-center flex flex-wrap sm:flex-nowrap   bg-darkGreen gap-x-4 sm:gap-x-4 md:gap-x-10 lg:gap-x-6 justify-center items-center overflow-hidden">
+        className="w-[70%] sm:w-full rounded-xl h-auto  mx-auto gap-y-10 sm:gap-y-0 text-center flex flex-wrap sm:flex-nowrap   bg-darkGreen dark:bg-darkerGreen gap-x-4 sm:gap-x-4 md:gap-x-10 lg:gap-x-6 justify-center items-center overflow-hidden">
         {landingSections.map((item) => {
           return (
             <HomeMainCardSectionItem

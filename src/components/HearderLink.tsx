@@ -5,7 +5,7 @@ const HearderLink: React.FC<{ title: string; to: string }> = ({
   to,
 }) => {
   return (
-    <Link to={to} className="text-base text-white hover:text-lightGreen">
+    <Link to={to} className=" text-white hover:text-lightGreen font-[900]">
       {title}
     </Link>
   );

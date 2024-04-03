@@ -20,7 +20,7 @@ const UserPlaylistShortcutItem: React.FC<{
       <p
         className={`text-xs text-center ${
           item?.description === "" ? "w-0 p-0" : "w-1/3 p-1"
-        } rounded text-lightGreen bg-dark`}>
+        } rounded bg-light text-black dark:bg-dark dark:text-light `}>
         {item?.description}
       </p>
     </motion.div>

@@ -104,7 +104,7 @@ const PlaylistDetails_TracksItemsPage = () => {
               }}
               initial="hidden"
               animate="visible"
-              className="w-full pb-6 bg-lightGreen rounded-xl mt-2">
+              className="w-full pb-6 bg-lightGreen dark:bg-dark/20 rounded-xl mt-2">
               <div className="mx-auto flex flex-col md:flex-row gap-x-2 ">
                 <PlaylistTracksImagedetails
                   total={data.tracks.total}

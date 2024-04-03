@@ -61,13 +61,14 @@ const PlaylistItems: React.FC = () => {
               hidden={data.next === null}
             />
           </div>
+          
           <motion.ul
             variants={{
               visible: { transition: { staggerChildren: 0.05 } },
             }}
             initial={{ y: -50 }}
             animate={{ y: 0 }}
-            className={` mx-auto w-[90%] z-10 rounded-md bg-darkGreen  ${
+            className={` mx-auto w-[90%] z-10 rounded-md dark:bg-darkGreen bg-lightGreen  ${
               data && data.items.length < 8 ? "min-h-[180px]" : "min-h-[560px]"
             }   flex gap-3 py-3 px-2 flex-wrap justify-center `}>
             {data.items.map((playlist, i) => {

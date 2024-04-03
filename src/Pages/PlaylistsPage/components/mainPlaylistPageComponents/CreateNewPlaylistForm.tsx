@@ -41,11 +41,13 @@ const CreateNewPlaylistForm: React.FC = () => {
               type="text"
               name="playlistName"
               placeholder="playlistName"
+              playlist={true}
             />
             <InputField
               type="text"
               name="playlistDes"
               placeholder="playlist Description"
+              playlist={true}
             />
             <div className="flex gap-x-4 text-light justify-center items-center">
               <label>
@@ -53,7 +55,7 @@ const CreateNewPlaylistForm: React.FC = () => {
                   type="radio"
                   name="public"
                   value="true"
-                  className="checked:text-red-600 mx-1"
+                  className="mx-1"
                   defaultChecked
                 />
                 public

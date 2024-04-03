@@ -16,7 +16,7 @@ const Categories: React.FC<{
       initial="hidden"
       animate="visible"
       exit={{ y: -300 }}
-      className=" bg-light rounded-md flex py-3 justify-center items-center  min-h-[560px]">
+      className=" bg-offWhite dark:bg-simiLight rounded-md flex py-3 justify-center items-center  min-h-[560px]">
       <motion.ul
         variants={{ visible: { transition: { staggerChildren: 0.09 } } }}
         className=" flex flex-wrap justify-center gap-3 ">

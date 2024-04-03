@@ -27,7 +27,7 @@ export const StyledPlaylistPagenationButtons: React.FC<{
           x: 0,
           transition: { stiffness: 50, duration: 0.2 },
         }}
-        className={`rounded-xl bg-darkGreen ${
+        className={`rounded-xl dark:bg-darkGreen bg-lightGreen ${
           moreThanTwo ? "w-36 h-36 " : "w-28 h-28"
         } ${title === "Prev" ? "ps-2 text-start" : "pe-2 text-end"} `}>
         <button

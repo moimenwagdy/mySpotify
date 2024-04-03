@@ -31,7 +31,7 @@ const UsersNewPLManage = () => {
       key={sudoKey}
       initial="hidden"
       animate="visible"
-      className={`text-center bg-dark/90 rounded-md p-3 ${
+      className={`text-center bg-dark/20 dark:bg-dark/90 rounded-md p-3 ${
         noItems ? "p-3" : ""
       } flex flex-col gap-y-3`}>
       {!noItems ? (

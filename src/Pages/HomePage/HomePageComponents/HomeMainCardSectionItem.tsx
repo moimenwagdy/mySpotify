@@ -6,6 +6,7 @@ const HomeMainCardSectionItem: React.FC<{
   imgMargin?: boolean;
 }> = ({ imgUrl, header, imgMargin }) => {
   const currentScreenWidth = window.innerWidth;
+  //specify small screen size for style and animation purposes 
   const smallScreen = currentScreenWidth < 640;
   return (
     <motion.li

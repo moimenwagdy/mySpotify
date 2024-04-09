@@ -1,4 +1,4 @@
-import { errorContent } from "../../../utllties/interfaces";
+import { errorContent } from "../../../components/Error/types/Types";
 import { playlistItem } from "../../PlaylistsPage/types/Types";
 
 export interface searchAlbums {

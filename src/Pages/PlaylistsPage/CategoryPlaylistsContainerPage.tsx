@@ -3,13 +3,14 @@ import { exitAction } from "../../stateRoot/exitSlice";
 import { Await, useNavigate, useRouteLoaderData } from "react-router";
 import { Suspense, useEffect, useState } from "react";
 import LoadingIndecator from "../../components/LoadingIndecator";
-import PlaylistItems from "./components/category'sPlaylistsComponents/PlaylistItems";
-import NormalPlaylistPagenationButtons from "./components/category'sPlaylistsComponents/NormalPlaylistPagenationButtons";
+import PlaylistItems from "../../components/Playlist/PlaylistItems";
+import NormalPlaylistPagenationButtons from "../../components/Playlist/NormalPlaylistPagenationButtons";
 import { useSearchParams } from "react-router-dom";
-import ErrorFallback from "../../components/ErrorFallback";
+import ErrorFallback from "../../components/Error/ErrorFallback";
 import playlistData from "./types/Types";
 import { AnimatePresence, motion } from "framer-motion";
 import { playlisTracksActions } from "../../stateRoot/playlistTracksSlice";
+import PlaylistHeader from "../../components/Playlist/PlaylistHeader";
 
 const CategoryPlaylistsContainerPage = () => {
   const [myOffset, setMyOffset] = useState<string>("10");
@@ -18,9 +19,11 @@ const CategoryPlaylistsContainerPage = () => {
   const [searchPrams] = useSearchParams();
   const offset = searchPrams.get("offset") as string;
   const navigate = useNavigate();
-  const defaultOffset = useAppSelector(
-    (state) => state.playlistPages.offsetDefaultVal
+  const exit = useAppSelector((state) => state.exitSlice.exiting);
+  const playlistData = useAppSelector(
+    (state) => state.playlistResponseSlice.data.playlist
   );
+
   function backToCateg(): void {
     dispatch(exitAction.setExit());
     setTimeout(() => {
@@ -31,13 +34,7 @@ const CategoryPlaylistsContainerPage = () => {
     setMyOffset(offset);
     dispatch(playlisTracksActions.reset());
   }, [offset, dispatch]);
-  const exit = useAppSelector((state) => state.exitSlice.exiting);
-  const playlistData = useAppSelector(
-    (state) => state.playlistResponseSlice.data.playlist
-  );
-  const playlistMessage = useAppSelector(
-    (state) => state.playlistResponseSlice.data.message
-  );
+
   return (
     <AnimatePresence>
       {!exit && (
@@ -49,32 +46,14 @@ const CategoryPlaylistsContainerPage = () => {
               }
               return (
                 <motion.main
-                className="min-h-[50vh]"
+                  className="min-h-[50vh]"
                   variants={{
                     hidden: { opacity: 0 },
                   }}
-                  exit="hidden" >
-                  <section className="mx-auto flex w-[90%] flex-col justify-center items-center ">
-                    <h1 className=" text-lg font-[600] texy-center mt-2">
-                      {playlistMessage}
-                    </h1>
-                    <aside className="flex justify-between items-center w-full">
-                      <div className="ms-[50%] -translate-x-[50%]">
-                        {Number(playlistData.total) > 10 && (
-                          <NormalPlaylistPagenationButtons offset={offset} />
-                        )}
-                      </div>
-                      <p className="">
-                        {Number(offset) + defaultOffset <
-                        Number(playlistData.total)
-                          ? Number(offset) + defaultOffset
-                          : playlistData.total}
-                        /{playlistData.total}
-                      </p>
-                    </aside>
-                  </section>
+                  exit="hidden">
+                  <PlaylistHeader />
                   <PlaylistItems key={myOffset} />
-                  {Number(playlistData.total) > 10 && (
+                  {playlistData.total > 10 && (
                     <NormalPlaylistPagenationButtons offset={offset} />
                   )}
                   <p

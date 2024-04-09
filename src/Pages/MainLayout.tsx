@@ -5,9 +5,9 @@ import {
   myToken,
 } from "../utllties/tokenAndDurationControl";
 import { useSubmit } from "react-router-dom";
-import Header from "../components/Header";
-import NavUserDataContainer from "../uiux/NavUserDataContainer";
-import HomeTapsNavbar from "../components/HomeTapsNavbar";
+import Header from "../components/Header/Header";
+import NavUserDataContainer from "../components/Navbar/NavUserDataContainer";
+import HomeTapsNavbar from "../components/Navbar/HomeTapsNavbar";
 import Footer from "../components/Footer";
 
 const MainLayout = () => {

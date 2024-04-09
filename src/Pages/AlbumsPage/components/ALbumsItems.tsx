@@ -3,14 +3,14 @@ import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router";
 import { getAlbums } from "../Functions/FetchAlbums";
 import { artistsAlbums } from "../Types/Types";
-import { errorContent } from "../../../utllties/interfaces";
-import AlbumItem from "./AlbumItem";
+import { errorContent } from "../../../components/Error/types/Types";
+import AlbumItem from "../../../components/AlbumItem/AlbumItem";
 import { useState } from "react";
 import { queryClient } from "../../../utllties/queryClient";
 import LoadingIndecator from "../../../components/LoadingIndecator";
-import ErrorFallback from "../../../components/ErrorFallback";
-import Button from "../../../uiux/Button";
-import PagenatioButtons from "./PagenatioButtons";
+import ErrorFallback from "../../../components/Error/ErrorFallback";
+import Button from "../../../components/Button";
+import PagenationButtons from "./PagenationButtons";
 
 const AlbumItems = () => {
   const navigate = useNavigate();
@@ -20,7 +20,6 @@ const AlbumItems = () => {
   const [albumsOffset, setAlbumsOffset] = useState<number>(0);
   const {
     data,
-    isFetched,
     isLoading,
     isError,
     error,
@@ -29,8 +28,6 @@ const AlbumItems = () => {
     queryFn: () => getAlbums(id!, albumsOffset),
     enabled: queryClient.getQueryData([albumsOffset]) !== albumsOffset,
   });
-  isFetched && console.log(data);
-  console.log(albumsOffset);
   function nextAlbums() {
     setAlbumsOffset((prv) => prv + 15);
   }
@@ -43,7 +40,7 @@ const AlbumItems = () => {
 
   let content = (
     <>
-      <PagenatioButtons
+      <PagenationButtons
         data={data!}
         nextAlbums={nextAlbums}
         prevAlbums={prevAlbums}
@@ -62,7 +59,7 @@ const AlbumItems = () => {
           </span>
         </span>
         <AlbumItem data={data!} />
-        <PagenatioButtons
+        <PagenationButtons
           data={data!}
           nextAlbums={nextAlbums}
           prevAlbums={prevAlbums}

@@ -1,5 +1,5 @@
 const Logout = () => {
-  return <div className="text-center mt-20"></div>;
+  return <></>;
 };
 
 export default Logout;

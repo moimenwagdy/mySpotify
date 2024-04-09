@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-// import WelcomePage from "../Pages/WelcomePage";
-import LandingPage from "../Pages/LandingPage";
-import { loader as authLoader } from "../Pages/LandingPage";
+import HomePage from "../Pages/HomePage/HomePage";
+import { loader as authLoader } from "../Pages/HomePage/HomePage";
 import { action as logOutAction } from "../Pages/LogoutPage";
 import MainLayout from "../Pages/MainLayout";
 import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage";
@@ -9,9 +8,9 @@ import Albums from "../Pages/AlbumsPage/AlbumsPage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import PlayListsPage, {
   action as CreatePlayListAction,
-} from "../Pages/PlaylistsPage/PlayListsPage";
-import ErrorFallback from "../components/ErrorFallback";
-import { loader } from "../Pages/PlaylistsPage/components/category'sPlaylistsComponents/PlaylistItems";
+} from "../Pages/PlaylistsPage/PlayListsMainPage";
+import ErrorFallback from "../components/Error/ErrorFallback";
+import { loader } from "../components/Playlist/PlaylistItems";
 import CategoryPlaylistsContainerPage from "../Pages/PlaylistsPage/CategoryPlaylistsContainerPage";
 import PlaylistDetails_TracksItemsPage, {
   loader as playlistDetailsLoader,
@@ -22,9 +21,8 @@ import { searchAction } from "../Pages/SearchPage/components/SearchForm";
 import {
   LocalPlaylists,
   localPlaylistsLoader,
-} from "../Pages/PlaylistsPage/LocalPlaylists";
+} from "../Pages/PlaylistsPage/LocalPlaylistsPage";
 
-// import { current } from "@reduxjs/toolkit";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -34,7 +32,7 @@ const route = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <LandingPage />,
+        element: <HomePage />,
         loader: authLoader,
       },
       {
@@ -67,14 +65,6 @@ const route = createBrowserRouter([
             path: ":id?",
             loader: loader,
             id: "CPL",
-            shouldRevalidate: ({ nextUrl }) => {
-              const NexturlParams = new URLSearchParams(nextUrl.search);
-              const myNextParam = NexturlParams.get("offset");
-              const CurrenturlParams = new URLSearchParams(nextUrl.search);
-              const myCurrentParam = CurrenturlParams.get("offset");
-
-              return myNextParam !== null || myCurrentParam !== null;
-            },
             children: [
               { index: true, element: <CategoryPlaylistsContainerPage /> },
               {

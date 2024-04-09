@@ -1,4 +1,4 @@
-import PlaylistItem from "../../PlaylistsPage/components/category'sPlaylistsComponents/PlaylistItem";
+import PlaylistItem from "../../../components/Playlist/PlaylistItem";
 import { playlistContent } from "../../PlaylistsPage/types/Types";
 
 const SerachPlaylisrResult: React.FC<{

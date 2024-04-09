@@ -1,16 +1,18 @@
 import { faForward, faBackward } from "@fortawesome/free-solid-svg-icons";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import categoriesFetch from "../../utllties/categoriesFetch";
+import categoriesFetch from "./functions/categoriesFetch";
 import { useState } from "react";
-import { CategoriesResponse, errorContent } from "../../utllties/interfaces";
+import { errorContent } from "../../components/Error/types/Types";
 import { queryClient } from "../../utllties/queryClient";
 import Categories from "./components/Categories";
-import Button from "../../uiux/Button";
-import ErrorFallback from "../../components/ErrorFallback";
+import Button from "../../components/Button";
+import ErrorFallback from "../../components/Error/ErrorFallback";
 import LoadingIndecator from "../../components/LoadingIndecator";
 import PagenationButton from "./components/PagenationButton";
+import { CategoriesResponse } from "./types/types";
 const CategoriesPage = () => {
   const [offset, setOffset] = useState<number>(0);
+  //using react query to get categories
   const {
     data,
     isError,
@@ -19,8 +21,9 @@ const CategoriesPage = () => {
   }: UseQueryResult<CategoriesResponse, errorContent> = useQuery({
     queryKey: ["categories", offset],
     queryFn: ({ signal }) => categoriesFetch({ signal, offset }),
+    //revalidate the query if the current offset changed compared with the cashed offset in the memory
     enabled: queryClient.getQueryData([offset]) !== offset,
-    gcTime: 1000,
+    // set the time between every query run, when the user navigate between taps to 20sec, avoiding unneeded requests
     staleTime: 20000,
   });
   function increase(): void {
@@ -44,7 +47,7 @@ const CategoriesPage = () => {
         <PagenationButton xValue={-150} icon={faBackward} onClick={decrease} />
         <PagenationButton xValue={150} icon={faForward} onClick={increase} />
       </aside>
-      <Categories data={data} key={offset} />
+      <Categories data={data!} key={offset} />
       <div className=" w-1/4 flex mx-auto gap-x-6 justify-center items-center sm:hidden">
         <Button title="Previous" onClick={decrease} />
         <Button title="Next" onClick={increase} />
@@ -56,7 +59,6 @@ const CategoriesPage = () => {
   }
 
   if (isError) {
-    console.log(error);
     content = <ErrorFallback ErrorData={error} />;
   }
 

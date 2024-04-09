@@ -9,7 +9,7 @@ import { exitAction } from "../../../../stateRoot/exitSlice";
 import CreateNewPlaylistForm from "./CreateNewPlaylistForm";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Button from "../../../../uiux/Button";
+import Button from "../../../../components/Button";
 
 const UsersNewPLManage = () => {
   const data = useLoaderData() as playlistItem;

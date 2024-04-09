@@ -4,9 +4,9 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../stateRoot/reduxHooks";
-import Button from "../../../../uiux/Button";
+import Button from "../../../../components/Button";
 import { exitAction } from "../../../../stateRoot/exitSlice";
-import { errorContent } from "../../../../utllties/interfaces";
+import { errorContent } from "../../../../components/Error/types/Types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
 

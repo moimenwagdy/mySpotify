@@ -32,6 +32,7 @@ const UserPlaylistContainer = () => {
   const noItems = data?.items.length === 0;
   const nullData = data === null;
   const nonUserPlaylistsExist = nonUserPlayLists.length !== 0;
+
   function openNewPlaylistForm() {
     if (formIsOpened) {
       return;
@@ -66,6 +67,7 @@ const UserPlaylistContainer = () => {
         );
     }
   }
+
   let content = <p>Playlists</p>;
   if (userToken) {
     content = (
@@ -115,6 +117,7 @@ const UserPlaylistContainer = () => {
       </AnimatePresence>
     );
   }
+
   return (
     <main className="bg-offWhite/50 dark:bg-dark p-4 mt-8 rounded-md lg:min-h-[50vh]">
       <section className="w-[98%] p-2  rounded-md  bg-darkGreen dark:bg-darkerGreen roundded-lg mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-normal lg:items-stretch ">
@@ -138,7 +141,7 @@ const UserPlaylistContainer = () => {
             )}
           </motion.div>
         </section>
-        <section className="w-full lg:w-2/4 h-full">
+        <section className="w-full lg:w-1/2 h-full">
           <UsersNewPLManage />
         </section>
       </section>

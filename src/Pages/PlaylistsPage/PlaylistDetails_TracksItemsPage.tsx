@@ -10,18 +10,19 @@ import { myToken } from "../../utllties/tokenAndDurationControl";
 import { Suspense, useEffect } from "react";
 import LoadingIndecator from "../../components/LoadingIndecator";
 import { playlistDetails, tracks } from "./types/Types";
-import ErrorFallback from "../../components/ErrorFallback";
+import ErrorFallback from "../../components/Error/ErrorFallback";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { getTracks } from "./functions/getTracks";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../stateRoot/reduxHooks";
 import { queryClient } from "../../utllties/queryClient";
-import { errorContent } from "../../utllties/interfaces";
+import { errorContent } from "../../components/Error/types/Types";
 import { motion } from "framer-motion";
-import TrackItem from "./components/playlistDetailsAndTracksComponents/TrackItem";
-import PlaylistTracksNavigationButtons from "./components/playlistDetailsAndTracksComponents/PlaylistTracksNavigationButtons";
+import TrackItem from "../../components/TrackItem/TrackItem";
+import PlaylistTracksNavigationButtons from "../../components/TrackItem/PlaylistTracksNavigationButtons";
 import PlaylistTracksImagedetails from "./components/playlistDetailsAndTracksComponents/PlaylistTracksImagedetails";
 import { exitAction } from "../../stateRoot/exitSlice";
+import PlaylistCleared from "./components/playlistDetailsAndTracksComponents/PlaylistCleared";
 
 const PlaylistDetails_TracksItemsPage = () => {
   const navigate = useNavigate();
@@ -31,9 +32,7 @@ const PlaylistDetails_TracksItemsPage = () => {
   useEffect(() => {
     dispatch(exitAction.notExit());
   });
-  // const defaultOffset = useAppSelector(
-  // (state) => state.playlistPages.offsetDefaultVal
-  // );
+
   const [params] = useSearchParams();
   const playlisID = params.get("pListId");
   const offset = useAppSelector((state) => state.playlistTracksSlice.offset);
@@ -49,8 +48,9 @@ const PlaylistDetails_TracksItemsPage = () => {
     queryFn: () => getTracks(playlisID!, offset),
     enabled: queryClient.getQueryData([offset]) !== offset,
   });
+  const TracksDataExist = tracksData?.total !== 0;
   useEffect(() => {
-    if (isFetched && tracksData?.total === 0) {
+    if (isFetched && !TracksDataExist) {
       const time = setTimeout(() => {
         navigate("/playlists");
       }, 1000);
@@ -61,7 +61,7 @@ const PlaylistDetails_TracksItemsPage = () => {
     }
     localStorage.setItem("pListId", playlisID!);
   });
-  isFetched && console.log(tracksData);
+
   let content = (
     <>
       {isFetched &&
@@ -73,13 +73,8 @@ const PlaylistDetails_TracksItemsPage = () => {
     </>
   );
 
-  if (isFetched && tracksData?.total === 0) {
-    content = (
-      <div className="mt-10 text-white text-center">
-        <p> playlist Cleared </p>
-        returning to your playlists in 3 seconds
-      </div>
-    );
+  if (isFetched && !TracksDataExist) {
+    content = <PlaylistCleared />;
   }
 
   if (isLoading) {

@@ -7,8 +7,6 @@ export const setTrackToPlaylist = async (
   const tokens = myToken();
   const userToken = tokens?.userToken;
   const nonUserToken = tokens?.nonUserToken;
-  console.log(playlistID);
-  console.log(uriPayload);
   const response = await fetch(
     `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
     {

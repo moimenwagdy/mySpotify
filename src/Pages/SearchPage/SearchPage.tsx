@@ -1,20 +1,16 @@
 import { useActionData } from "react-router";
 import SearchForm from "./components/SearchForm";
 import { fullSearchResult } from "./Types/Types";
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import SearchTrackResult from "./components/SearchTrackResult";
 import SerachPlaylisrResult from "./components/SerachPlaylisrResult";
-import AlbumItem from "../AlbumsPage/components/AlbumItem";
+import AlbumItem from "../../components/AlbumItem/AlbumItem";
 import SectionResultCard from "./components/SectionResultCard";
 import SearchArtistsResults from "./components/SearchArtistsResults";
 
 const SearchPage = () => {
   const data = useActionData() as fullSearchResult;
-  useEffect(() => {
-    data && console.log(data);
-    data?.error && console.log(data.error);
-  }, [data]);
+
   return (
     <main className="flex flex-col gap-y-10 bg-darkGreen dark:bg-transparent mt-10 dark:mt-2 ">
       <motion.div

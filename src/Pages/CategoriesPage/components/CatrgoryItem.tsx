@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { CategoriesResponse } from "../../../utllties/interfaces";
+
 import { motion } from "framer-motion";
 import { exitAction } from "../../../stateRoot/exitSlice";
 import { useAppDispatch, useAppSelector } from "../../../stateRoot/reduxHooks";
+import { CategoriesResponse } from "../types/types";
 
 const CatrgoryItem: React.FC<CategoriesResponse> = ({ categories }) => {
   const dispatch = useAppDispatch();

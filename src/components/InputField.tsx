@@ -23,12 +23,12 @@ const InputField: React.FC<{
     <input
       autoFocus={autoFocus}
       type={type}
-      className={`text-lightGreen py-1 px-4 bg-transparent outline outline-2 ${
+      className={` py-1 px-4 bg-transparent outline outline-2 ${
         className ? className : ""
       } ${
         playlist
-          ? "dark:placeholder:text-white/50 placeholder:text-white/50 outline-white/50 focus:outline-white"
-          : "placeholder:text-dark/90 dark:placeholder:text-white/50 text-darkerGreen dark:outline-lightGreen/50 dark:focus:outline-lightGreen outline-white/50 focus:outline-white"
+          ? "text-dark dark:text-lightGreen dark:placeholder:text-white/50 placeholder:text-white/50 outline-white/50 focus:outline-white"
+          : "placeholder:text-dark/90 dark:placeholder:text-white/50 text-dark dark:text-lightGreen dark:outline-lightGreen/50 dark:focus:outline-lightGreen outline-white/50 focus:outline-white"
       }   rounded-md`}
       name={name}
       placeholder={placeholder}

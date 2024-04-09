@@ -66,7 +66,7 @@ const LoadingIndecator: React.FC = () => {
                 duration: 1,
                 repeat: Infinity,
                 repeatDelay: 2,
-                delay: (index === 1 && 1) || (index === 2 && 2) || 0,
+                delay: index,
               }}>
               {dot}
             </motion.span>

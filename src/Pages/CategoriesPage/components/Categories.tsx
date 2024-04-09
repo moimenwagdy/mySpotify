@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { CategoriesResponse } from "../../../utllties/interfaces";
+import { CategoriesResponse } from "../types/types";
 import CatrgoryItem from "./CatrgoryItem";
 
 const Categories: React.FC<{
-  data: CategoriesResponse | undefined;
+  data: CategoriesResponse;
 }> = ({ data }) => {
   return (
     <motion.aside

@@ -1,8 +1,8 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { getAlbumTracks } from "../Functions/getAlbumTracks";
 import { useSearchParams } from "react-router-dom";
-import { errorContent } from "../../../utllties/interfaces";
-import TrackItem from "../../PlaylistsPage/components/playlistDetailsAndTracksComponents/TrackItem";
+import { errorContent } from "../../../components/Error/types/Types";
+import TrackItem from "../../../components/TrackItem/TrackItem";
 import { albumTracks } from "../Types/types";
 import ArtisitsImage from "./ArtisitsImage";
 
@@ -14,7 +14,6 @@ const AlbumTracksContainer = () => {
       queryKey: ["AlbumTraks", albumId],
       queryFn: () => getAlbumTracks(albumId!),
     });
-  isFetched && console.log(data);
 
   return (
     <main className="bg-lightGreen dark:bg-dark/70  p-6 m-2 rounded-xl">
@@ -22,11 +21,7 @@ const AlbumTracksContainer = () => {
         <div className="w-3/4 lg:w-1/2">
           {isFetched &&
             data?.items.map((item) => {
-              return (
-                <>
-                  <TrackItem track={item} />
-                </>
-              );
+              return <TrackItem key={item.name} track={item} />;
             })}
         </div>
         <ArtisitsImage />

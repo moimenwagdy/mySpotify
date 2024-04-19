@@ -7,8 +7,8 @@ const navLinks = [
   { to: "/playlists", title: "Playlists" },
   { to: "/categories", title: "Categories" },
   { to: "/search", title: "Search" },
-  { to: "/about", title: "About" },
-  { to: "/contact", title: "Contact" },
+  // { to: "/about", title: "About" },
+  // { to: "/contact", title: "Contact" },
 ];
 
 const HeaderRightSection = () => {

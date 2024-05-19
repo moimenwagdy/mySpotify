@@ -7,8 +7,6 @@ const navLinks = [
   { to: "/playlists", title: "Playlists" },
   { to: "/categories", title: "Categories" },
   { to: "/search", title: "Search" },
-  // { to: "/about", title: "About" },
-  // { to: "/contact", title: "Contact" },
 ];
 
 const HeaderRightSection = () => {
@@ -38,12 +36,12 @@ const HeaderRightSection = () => {
         onHoverStart={renderHanlder}
         onHoverEnd={endHoverHandler}
         variants={{
-          init: { x: 0, y: smallScreen ? -560 : -120 },
+          init: { x: 0, y: smallScreen ? -500 : -120 },
           now: { x: 100 },
         }}
         initial="now"
         animate="init"
-        transition={{ duration: 1, type: "spring", stiffness: 80 }}
+        transition={{ duration: 1, type: "spring", stiffness: 75, damping: 15 }}
         whileHover={{
           y: smallScreen ? -50 : 0,
           width: "105%",
@@ -52,11 +50,14 @@ const HeaderRightSection = () => {
         }}
         className={` ${
           renderControl ? "flex justify-center items-center" : "flex flex-col"
-        }  justify-center items-center shadow-xl shadow-black/20  z-10 w-4/5 sm:w-3/5 h-full sm:h-[240px]  absolute -top-4 -right-4  rounded-bl-[100%] bg-darkGreen hover:bg-darkGreen/70 dark:bg-darkerGreen hover:dark:bg-darkerGreen/60 transition-colors duration-[1500ms] `}>
+        }  justify-center items-center shadow-xl shadow-black/20  z-10 w-4/5 sm:w-3/5 
+        h-full sm:h-[240px]  absolute -top-4 -right-4  rounded-bl-[100%]
+         bg-darkGreen  dark:bg-darkerGreen
+           transition-colors duration-[1500ms] `}>
         <motion.ul
           variants={{
             init: {
-              transition: { staggerChildren: 0.5 },
+              transition: { staggerChildren: 0.5, damping: 15 },
             },
           }}
           className="flex flex-col sm:flex-row gap-x-4 gap-y-3 sm:gap-y-0 justify-center items-center">
@@ -67,7 +68,8 @@ const HeaderRightSection = () => {
                   key={navLink.to}
                   className="text-xl md:text-lg"
                   variants={{ init: { x: 0, y: 0, opacity: 1 } }}
-                  initial={{ x: 100, y: -60, opacity: 0.5 }}>
+                  initial={{ x: 100, y: -60, opacity: 0.5 }}
+                  transition={{ type: "spring", damping: 15 }}>
                   <HearderLink to={navLink.to} title={navLink.title} />
                 </motion.li>
               );
@@ -82,6 +84,7 @@ const HeaderRightSection = () => {
                   className="text-base text-end me-2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
+                  transition={{ type: "spring", damping: 15 }}
                   exit={{ opacity: 0 }}>
                   <HearderLink to={navLink.to} title={navLink.title} />
                 </motion.li>

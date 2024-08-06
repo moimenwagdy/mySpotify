@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import landingSections from "../functions.tsx/MainPageSectionArray";
 import HomeMainCardSectionItem from "./HomeMainCardSectionItem";
+import CallToAction from "../../../components/CallToAction/CallToAction";
 
 const Home: React.FC = () => {
   const currentScroll = window.scrollY;
@@ -25,14 +26,14 @@ const Home: React.FC = () => {
       }}
       initial="hidden"
       animate="visible"
-      className="p-6 bg-simiDark dark:bg-dark  mt-6 ">
+      className="relative p-6 bg-simiDark dark:bg-dark  mt-6 ">
       <motion.ul
         variants={{
           visible: {
             transition: { staggerChildren: 0.5 },
           },
         }}
-        className="w-[70%] sm:w-full rounded-xl h-auto  mx-auto gap-y-10 sm:gap-y-0 text-center flex flex-wrap sm:flex-nowrap   bg-darkGreen dark:bg-darkerGreen gap-x-4 sm:gap-x-4 md:gap-x-10 lg:gap-x-6 justify-center items-center overflow-hidden">
+        className="w-full rounded-xl h-auto gap-y-20 sm:gap-y-0 text-center grid grid-cols-2  sm:flex sm:flex-nowrap  bg-darkGreen dark:bg-darkerGreen gap-x-1 sm:gap-x-4 lg:gap-x-6 sm:justify-center sm:items-center overflow-hidden">
         {landingSections.map((item) => {
           return (
             <HomeMainCardSectionItem
@@ -44,6 +45,7 @@ const Home: React.FC = () => {
           );
         })}
       </motion.ul>
+      <CallToAction />
     </motion.div>
   );
 };

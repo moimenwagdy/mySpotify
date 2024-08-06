@@ -6,7 +6,6 @@ import {
 } from "../utllties/tokenAndDurationControl";
 import { useSubmit } from "react-router-dom";
 import Header from "../components/Header/Header";
-import NavUserDataContainer from "../components/Navbar/NavUserDataContainer";
 import HomeTapsNavbar from "../components/Navbar/HomeTapsNavbar";
 import Footer from "../components/Footer";
 
@@ -29,9 +28,6 @@ const MainLayout = () => {
   return (
     <>
       <Header />
-      <main className="flex justify-end -mt-3 sm:-mt-1 mb-2">
-        <NavUserDataContainer />
-      </main>
       <HomeTapsNavbar />
       <main>
         <Outlet />

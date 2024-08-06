@@ -1,12 +1,11 @@
+import AlternativeHeader from "./AlternativeHeader";
 import HeaderLeftSection from "./HeaderLeftSection";
-import HeaderRightSection from "./HeaderRightSection";
-
 const Header = () => {
   return (
     <header className=" flex flex-col z-[1]">
       <section className="flex h-24">
         <HeaderLeftSection />
-        <HeaderRightSection />
+        <AlternativeHeader />
       </section>
     </header>
   );

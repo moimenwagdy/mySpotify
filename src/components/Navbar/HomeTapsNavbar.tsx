@@ -3,7 +3,7 @@ import LightDarkControler from "./LightDarkControler";
 
 const HomeTapsNavbar = () => {
   return (
-    <nav className="relative w-full mx-auto bg-offWhite dark:bg-dark rounded-md mt-10 md:mt-8">
+    <nav className="relative w-full mx-auto bg-offWhite dark:bg-dark rounded-md mt-24 md:mt-24">
       <ul className="w-1/2 mx-auto flex justify-center items-center">
         <TapItem main title="Home" destination="/" />
         <TapItem main title="Categories" destination="categories" />
